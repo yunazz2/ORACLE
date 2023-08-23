@@ -20,6 +20,7 @@ WHERE username = 'HR';
 -- c## 없이 계정 생성 : ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 
+
 -- 1. 사용자 계정 생성
 -- CREATE USER 계정명 IDENTIFIED BY 비밀번호;
 CREATE USER HR IDENTIFIED BY 123456;
@@ -39,7 +40,7 @@ GRANT connect, resource TO HR; -- HR 계정에 connect, resource 권한을 부�
 
 
 -- 계정 삭제
--- DROP USER 계정명 CASCADA;
+-- DROP USER 계정명 CASCADE;
 
 -- 계정 잠금 해제
 -- ALTER USER 계정명 ACCOUNT UNLOCK;
