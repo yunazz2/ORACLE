@@ -780,3 +780,37 @@ FROM employee e
     JOIN job J USING(job_code) -- USING 키워드 : 조인하고자 하는 두 테이블의 컬럼명이 같으면, ON 키워드 대신 조인 조건을 간단하게 작성하는 키워드
                                -- (e 테이블과 j 테이블 둘 다 job_code 컬럼을 가지고있다.)
 ;
+
+-- 데이터 사전 뷰
+SELECT *
+FROM user_tables
+WHERE table_name LIKE '%EMP%'
+;
+
+-- 뷰 생성하기
+
+-- 1. 사원, 부서 테이블 조인한 결과를 뷰로 생성(위에서는 매번 사원 테이블, 부서 테이블을 따로 조회했었는데 뷰로 한꺼번에 묶어놓은 테이블을 생성할 수 있다.)
+SELECT e.emp_id
+      ,e.emp_name
+      ,d.dept_id
+      ,d.dept_title
+FROM employee e
+    LEFT JOIN department d ON e.dept_code = d.dept_id
+;
+
+-- 2. 뷰로 생성
+CREATE VIEW v_emp_dept AS
+SELECT e.emp_id
+      ,e.emp_name
+      ,d.dept_id
+      ,d.dept_title
+FROM employee e
+     LEFT JOIN department d ON e.dept_code = d.dept_id
+;
+
+-- 3. 뷰 조회
+SELECT * FROM v_emp_dept;
+
+-- 뷰 삭제
+DROP VIEW v_emp_dept;
+
