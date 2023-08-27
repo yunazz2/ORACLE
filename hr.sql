@@ -1,188 +1,188 @@
 
--- ì»¤ì„œ ì‹¤í–‰ ë‹¨ì¶•í‚¤ : ctrl + enter
--- ë¬¸ì„œ ì „ì²´ ì‹¤í–‰ : F5
+-- Ä¿¼­ ½ÇÇà ´ÜÃàÅ° : ctrl + enter
+-- ¹®¼­ ÀüÃ¼ ½ÇÇà : F5
 
 SELECT 1+1
 FROM dual;
 
--- ê³„ì • ì ‘ì† ëª…ë ¹ì–´
--- conn ê³„ì •ëª…/ë¹„ë°€ë²ˆí˜¸;
+-- °èÁ¤ Á¢¼Ó ¸í·É¾î
+-- conn °èÁ¤¸í/ºñ¹Ð¹øÈ£;
 conn system/123456;
 
--- SQLì€ ëŒ€/ì†Œë¬¸ìž êµ¬ë¶„ì´ ì—†ë‹¤.
--- ëª…ë ¹ì–´ í‚¤ì›Œë“œ ëŒ€ë¬¸ìž, ì‹ë³„ìžëŠ” ì†Œë¬¸ìž ì£¼ë¡œ ì‚¬ìš©í•œë‹¤. (ê°ìž ìŠ¤íƒ€ì¼ëŒ€ë¡œ ì‚¬ìš©)
+-- SQLÀº ´ë/¼Ò¹®ÀÚ ±¸ºÐÀÌ ¾ø´Ù.
+-- ¸í·É¾î Å°¿öµå ´ë¹®ÀÚ, ½Äº°ÀÚ´Â ¼Ò¹®ÀÚ ÁÖ·Î »ç¿ëÇÑ´Ù. (°¢ÀÚ ½ºÅ¸ÀÏ´ë·Î »ç¿ë)
 SELECT user_id, username
 FROM all_users
 WHERE username = 'HR';
 
 
--- ì‚¬ìš©ìž ê³„ì • ìƒì„±
--- c## ì—†ì´ ê³„ì • ìƒì„± : ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+-- »ç¿ëÀÚ °èÁ¤ »ý¼º
+-- c## ¾øÀÌ °èÁ¤ »ý¼º : ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 
 
--- 1. ì‚¬ìš©ìž ê³„ì • ìƒì„±
--- CREATE USER ê³„ì •ëª… IDENTIFIED BY ë¹„ë°€ë²ˆí˜¸;
+-- 1. »ç¿ëÀÚ °èÁ¤ »ý¼º
+-- CREATE USER °èÁ¤¸í IDENTIFIED BY ºñ¹Ð¹øÈ£;
 CREATE USER HR IDENTIFIED BY 123456;
 
--- 2. í…Œì´ë¸” ìŠ¤íŽ˜ì´ìŠ¤ ë³€ê²½
--- ALTER USER ê³„ì •ëª… DEFAULT TABLESPACE users; : HRê³„ì •ì˜ ê¸°ë³¸ í…Œì´ë¸” ì˜ì—­ì„ 'users'ì˜ì—­ìœ¼ë¡œ ì§€ì •
+-- 2. Å×ÀÌºí ½ºÆäÀÌ½º º¯°æ
+-- ALTER USER °èÁ¤¸í DEFAULT TABLESPACE users; : HR°èÁ¤ÀÇ ±âº» Å×ÀÌºí ¿µ¿ªÀ» 'users'¿µ¿ªÀ¸·Î ÁöÁ¤
 ALTER USER HR DEFAULT TABLESPACE users;
 
--- 3. ê³„ì •ì´ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” ìš©ëŸ‰ ì„¤ì •
--- HR ê³„ì •ì˜ ì‚¬ìš© ìš©ëŸ‰ì„ ë¬´í•œëŒ€ë¡œ ì§€ì •í•´ë³´ìž
--- ALTER USER ê³„ì •ëª… QUOTA UNLIMITED ON í…Œì´ë¸”ìŠ¤íŽ˜ì´ìŠ¤;
+-- 3. °èÁ¤ÀÌ »ç¿ëÇÒ ¼ö ÀÖ´Â ¿ë·® ¼³Á¤
+-- HR °èÁ¤ÀÇ »ç¿ë ¿ë·®À» ¹«ÇÑ´ë·Î ÁöÁ¤ÇØº¸ÀÚ
+-- ALTER USER °èÁ¤¸í QUOTA UNLIMITED ON Å×ÀÌºí½ºÆäÀÌ½º;
 ALTER USER HR QUOTA UNLIMITED ON users;
 
--- 4. ê³„ì •ì— ê¶Œí•œì„ ë¶€ì—¬
--- GRANT ê¶Œí•œëª…1, ê¶Œí•œëª…2 TO ê³„ì •ëª…;
-GRANT connect, resource TO HR; -- HR ê³„ì •ì— connect, resource ê¶Œí•œì„ ë¶€ì—¬
+-- 4. °èÁ¤¿¡ ±ÇÇÑÀ» ºÎ¿©
+-- GRANT ±ÇÇÑ¸í1, ±ÇÇÑ¸í2 TO °èÁ¤¸í;
+GRANT connect, resource TO HR; -- HR °èÁ¤¿¡ connect, resource ±ÇÇÑÀ» ºÎ¿©
 
 
--- ê³„ì • ì‚­ì œ
--- DROP USER ê³„ì •ëª… CASCADE;
+-- °èÁ¤ »èÁ¦
+-- DROP USER °èÁ¤¸í CASCADE;
 
--- ê³„ì • ìž ê¸ˆ í•´ì œ
--- ALTER USER ê³„ì •ëª… ACCOUNT UNLOCK;
+-- °èÁ¤ Àá±Ý ÇØÁ¦
+-- ALTER USER °èÁ¤¸í ACCOUNT UNLOCK;
 
--- SQL ì˜ˆì œ
+-- SQL ¿¹Á¦
 
 -- 3.
--- í…Œì´ë¸” EMPLOYEES ì˜ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì¡°íšŒí•˜ëŠ” QSLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- Å×ÀÌºí EMPLOYEES ÀÇ Å×ÀÌºí ±¸Á¶¸¦ Á¶È¸ÇÏ´Â QSL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 DESC employees;
 
--- í…Œì´ë¸” EMPLOYEES ì—ì„œ EMPLOYEE_ID, FIRST_NAME (íšŒì›ë²ˆí˜¸, ì´ë¦„) ë¥¼ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ì‚¬ì› í…Œì´ë¸”ì˜ ì‚¬ì› ë²ˆí˜¸ì™€ ì´ë¦„ì„ ì¡°íšŒ
+-- Å×ÀÌºí EMPLOYEES ¿¡¼­ EMPLOYEE_ID, FIRST_NAME (È¸¿ø¹øÈ£, ÀÌ¸§) ¸¦ Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- »ç¿ø Å×ÀÌºíÀÇ »ç¿ø ¹øÈ£¿Í ÀÌ¸§À» Á¶È¸
 SELECT employee_id, first_name
 FROM employees;
 
--- 4. í…Œì´ë¸” EMPLOYEES ì´ <ì˜ˆì‹œ>ì™€ ê°™ì´ ì¶œë ¥ë˜ë„ë¡ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤. (í•œê¸€ ë³„ì¹­ì„ ë¶€ì—¬í•˜ì—¬ ì¡°íšŒ)
--- * ë„ì–´ì“°ê¸°ê°€ ì—†ìœ¼ë©´ ë”°ì˜´í‘œ ìƒëžµ ê°€ëŠ¥
--- * AS ìƒëžµ ê°€ëŠ¥
--- ex) employee_id AS ì‚¬ì› ë²ˆí˜¸ (X)
---     employee_id AS "ì‚¬ì› ë²ˆí˜¸" (O)
--- AS(alias) : ì¶œë ¥ë˜ëŠ” ì»¬ëŸ¼ëª…ì— ë³„ì¹­ì„ ë¶€ì—¬í•˜ëŠ” ëª…ë ¹ì–´
-SELECT employee_id AS "ì‚¬ì› ë²ˆí˜¸" -- ë„ì–´ì“°ê¸°ê°€ ìžˆìœ¼ë©´ " "ë¡œ í‘œê¸°
-      ,first_name AS ì´ë¦„
-      ,last_name AS ì„±
-      ,email AS ì´ë©”ì¼
-      ,phone_number AS ì „í™”ë²ˆí˜¸
-      ,hire_date AS ìž…ì‚¬ì¼ìž
-      ,salary AS ê¸‰ì—¬
+-- 4. Å×ÀÌºí EMPLOYEES ÀÌ <¿¹½Ã>¿Í °°ÀÌ Ãâ·ÂµÇµµ·Ï Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. (ÇÑ±Û º°ÄªÀ» ºÎ¿©ÇÏ¿© Á¶È¸)
+-- * ¶ç¾î¾²±â°¡ ¾øÀ¸¸é µû¿ÈÇ¥ »ý·« °¡´É
+-- * AS »ý·« °¡´É
+-- ex) employee_id AS »ç¿ø ¹øÈ£ (X)
+--     employee_id AS "»ç¿ø ¹øÈ£" (O)
+-- AS(alias) : Ãâ·ÂµÇ´Â ÄÃ·³¸í¿¡ º°ÄªÀ» ºÎ¿©ÇÏ´Â ¸í·É¾î
+SELECT employee_id AS "»ç¿ø ¹øÈ£" -- ¶ç¾î¾²±â°¡ ÀÖÀ¸¸é " "·Î Ç¥±â
+      ,first_name AS ÀÌ¸§
+      ,last_name AS ¼º
+      ,email AS ÀÌ¸ÞÀÏ
+      ,phone_number AS ÀüÈ­¹øÈ£
+      ,hire_date AS ÀÔ»çÀÏÀÚ
+      ,salary AS ±Þ¿©
 FROM employees;
 
--- (*) ì• ìŠ¤í„°ë¦¬í¬ : ëª¨ë“  ì»¬ëŸ¼ ì§€ì •
+-- (*) ¾Ö½ºÅÍ¸®Å© : ¸ðµç ÄÃ·³ ÁöÁ¤
 SELECT *
 FROM employees;
 
--- 5. í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDë¥¼ ì¤‘ë³µëœ ë°ì´í„°ë¥¼ ì œê±°í•˜ê³  ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- DISTINCT ì»¬ëŸ¼ëª… : ì¤‘ë³µëœ ë°ì´í„°ë¥¼ ì œê±°í•˜ê³  ì¡°íšŒí•˜ëŠ” í‚¤ì›Œë“œ
+-- 5. Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID¸¦ Áßº¹µÈ µ¥ÀÌÅÍ¸¦ Á¦°ÅÇÏ°í Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- DISTINCT ÄÃ·³¸í : Áßº¹µÈ µ¥ÀÌÅÍ¸¦ Á¦°ÅÇÏ°í Á¶È¸ÇÏ´Â Å°¿öµå
 SELECT DISTINCT job_id
 FROM employees;
 
--- 6. í…Œì´ë¸” EMPLOYEES ì˜ SALARY(ê¸‰ì—¬)ê°€ 6000ì„ ì´ˆê³¼í•˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- WHERE ì¡°ê±´ : ì¡°íšŒ ì¡°ê±´ì„ ìž‘ì„±í•˜ëŠ” êµ¬ë¬¸
+-- 6. Å×ÀÌºí EMPLOYEES ÀÇ SALARY(±Þ¿©)°¡ 6000À» ÃÊ°úÇÏ´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- WHERE Á¶°Ç : Á¶È¸ Á¶°ÇÀ» ÀÛ¼ºÇÏ´Â ±¸¹®
 SELECT *
 FROM employees
 WHERE salary > 6000;
 
--- 7. í…Œì´ë¸” EMPLOYEES ì˜ SALARY(ê¸‰ì—¬)ê°€ 10000ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 7. Å×ÀÌºí EMPLOYEES ÀÇ SALARY(±Þ¿©)°¡ 10000ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
 WHERE salary = 10000;
 
--- 8. í…Œì´ë¸” EMPLOYEES ì˜ ëª¨ë“  ì†ì„±ë“¤ì„ SALARY ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬í•˜ê³ , FIRST_NAME ì„ ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬í•˜ì—¬ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ì •ë ¬ ëª…ë ¹ì–´
--- ORDER BY ì»¬ëŸ¼ëª… [ASC/DESC];
--- ASC : ì˜¤ë¦„ì°¨ìˆœ(defailt) => ìƒëžµ ê°€ëŠ¥
--- DESC : ë‚´ë¦¼ì°¨ìˆœ
+-- 8. Å×ÀÌºí EMPLOYEES ÀÇ ¸ðµç ¼Ó¼ºµéÀ» SALARY ¸¦ ±âÁØÀ¸·Î ³»¸²Â÷¼ø Á¤·ÄÇÏ°í, FIRST_NAME À» ±âÁØÀ¸·Î ¿À¸§Â÷¼ø Á¤·ÄÇÏ¿© Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- Á¤·Ä ¸í·É¾î
+-- ORDER BY ÄÃ·³¸í [ASC/DESC];
+-- ASC : ¿À¸§Â÷¼ø(defailt) => »ý·« °¡´É
+-- DESC : ³»¸²Â÷¼ø
 SELECT *
 FROM employees
 ORDER BY salary DESC, first_name ASC;
 
--- 9. í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- OR ì—°ì‚° : ~ ë˜ëŠ”, ~ ì´ê±°ë‚˜
+-- 9. Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- OR ¿¬»ê : ~ ¶Ç´Â, ~ ÀÌ°Å³ª
 -- WHERE A OR B;
 SELECT *
 FROM employees
 WHERE job_id = 'FI_ACCOUNT' OR job_id = 'IT_PROG';
 
--- 10. í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ë‹¨, IN í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•˜ì‹œì˜¤.
--- ì»¬ëŸ¼ëª… IN ('A', 'B') : OR ì—°ì‚°ì„ ëŒ€ì²´í•˜ì—¬ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” í‚¤ì›Œë“œ
+-- 10. Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ´Ü, IN Å°¿öµå¸¦ »ç¿ëÇÏ½Ã¿À.
+-- ÄÃ·³¸í IN ('A', 'B') : OR ¿¬»êÀ» ´ëÃ¼ÇÏ¿© »ç¿ëÇÒ ¼ö ÀÖ´Â Å°¿öµå
 SELECT *
 FROM employees
 WHERE job_id IN('FI_ACCOUNT', 'IT_PROG');
 
--- 11. í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì•„ë‹Œ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ë‹¨, IN í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•˜ì‹œì˜¤.
--- ì»¬ëŸ¼ëª… NOT IN ('A', 'B') : 'A', 'B'ë¥¼ ì œì™¸í•œ ê²°ê³¼ë¥¼ ì¡°íšŒ
+-- 11. Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ¾Æ´Ñ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ´Ü, IN Å°¿öµå¸¦ »ç¿ëÇÏ½Ã¿À.
+-- ÄÃ·³¸í NOT IN ('A', 'B') : 'A', 'B'¸¦ Á¦¿ÜÇÑ °á°ú¸¦ Á¶È¸
 SELECT *
 FROM employees
 WHERE job_id NOT IN('FI_ACCOUNT', 'IT_PROG');
 
--- 12. í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜IT_PROGâ€™ ì´ë©´ì„œ SALARY ê°€ 6000 ì´ìƒì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- AND ì—°ì‚° : ~ ì´ë©´ì„œ, ê·¸ë¦¬ê³ , ë™ì‹œì—
+-- 12. Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®IT_PROG¡¯ ÀÌ¸é¼­ SALARY °¡ 6000 ÀÌ»óÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- AND ¿¬»ê : ~ ÀÌ¸é¼­, ±×¸®°í, µ¿½Ã¿¡
 -- WHERE A AND B;
 SELECT *
 FROM employees
 WHERE job_id = 'IT_PROG' AND salary >= 6000;
 
--- 13. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ â€˜Sâ€™ë¡œ ì‹œìž‘í•˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 13. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ ¡®S¡¯·Î ½ÃÀÛÇÏ´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 -- LIKE
--- ì»¬ëŸ¼ëª… LIKE 'ì™€ì¼ë“œì¹´ë“œ';
--- % : ì™€ì¼ë“œì¹´ë“œë¡œ, ì—¬ëŸ¬ ë¬¸ìžë¥¼ ëŒ€ì²´
--- _ : ì™€ì¼ë“œì¹´ë“œë¡œ, í•œ ë¬¸ìžë¥¼ ëŒ€ì²´
+-- ÄÃ·³¸í LIKE '¿ÍÀÏµåÄ«µå';
+-- % : ¿ÍÀÏµåÄ«µå·Î, ¿©·¯ ¹®ÀÚ¸¦ ´ëÃ¼
+-- _ : ¿ÍÀÏµåÄ«µå·Î, ÇÑ ¹®ÀÚ¸¦ ´ëÃ¼
 SELECT *
 FROM employees
 WHERE first_name LIKE 'S%';
 
--- 14. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ â€˜sâ€™ë¡œ ëë‚˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 14. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ ¡®s¡¯·Î ³¡³ª´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
 WHERE first_name LIKE '%s';
 
--- 15. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì— â€˜sâ€™ê°€ í¬í•¨ë˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 15. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ¿¡ ¡®s¡¯°¡ Æ÷ÇÔµÇ´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
 WHERE first_name LIKE '%s%';
 
--- 16. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ 5ê¸€ìžì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 16. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ 5±ÛÀÚÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
 WHERE first_name LIKE '_____';
--- LENGTH(ì»¬ëŸ¼ëª…) : ê¸€ìž ìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+-- LENGTH(ÄÃ·³¸í) : ±ÛÀÚ ¼ö¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
 SELECT *
 FROM employees
 WHERE LENGTH(first_name) = 5;
 
--- 17. í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCTê°€ NULL ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 17. Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT°¡ NULL ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 -- IS NULL;
 SELECT *
 FROM employees
 WHERE commission_pct IS NULL;
 
--- 18. í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCTê°€ NULLì´ ì•„ë‹Œ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 18. Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT°¡ NULLÀÌ ¾Æ´Ñ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
 WHERE commission_pct IS NOT NULL;
 
--- 19. í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì›ì˜ HIRE_DATEê°€ 04ë…„ ì´ìƒì¸ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 19. Å×ÀÌºí EMPLOYEES ÀÇ »ç¿øÀÇ HIRE_DATE°¡ 04³â ÀÌ»óÀÎ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
-WHERE hire_date >= '04/01/01';  -- SQL Developer ì—ì„œ ë¬¸ìží˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ìžë™ ë³€í™˜
+WHERE hire_date >= '04/01/01';  -- SQL Developer ¿¡¼­ ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î ÀÚµ¿ º¯È¯
 
--- TO_DATE() : ë¬¸ìží˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
+-- TO_DATE() : ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î º¯È¯ÇÏ´Â ÇÔ¼ö
 SELECT *
 FROM employees
 WHERE hire_date >= TO_DATE('20040101', 'YYYYMMDD');
 
--- 20. í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì›ì˜ HIRE_DATEê°€ 04ë…„ë„ë¶€í„° 05ë…„ë„ì¸ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 20. Å×ÀÌºí EMPLOYEES ÀÇ »ç¿øÀÇ HIRE_DATE°¡ 04³âµµºÎÅÍ 05³âµµÀÎ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM employees
 WHERE hire_date >= TO_DATE('20040101', 'YYYYMMDD') AND hire_date <= TO_DATE('20051231', 'YYYYMMDD');
--- ì»¬ëŸ¼ BETWEEN A AND B;
--- : Aë³´ë‹¤ í¬ê±°ë‚˜ ê°™ê³  Bë³´ë‹¤ ìž‘ê±°ë‚˜ ê°™ì€ ì¡°ê±´ (ì‚¬ì´)
+-- ÄÃ·³ BETWEEN A AND B;
+-- : Aº¸´Ù Å©°Å³ª °°°í Bº¸´Ù ÀÛ°Å³ª °°Àº Á¶°Ç (»çÀÌ)
 SELECT *
 FROM employees
 WHERE hire_date BETWEEN TO_DATE('20040101', 'YYYYMMDD') AND TO_DATE('20051231', 'YYYYMMDD');
@@ -191,103 +191,103 @@ SELECT *
 FROM employees
 WHERE hire_date BETWEEN '04/01/01' AND '05/12/31';
 
--- 21. 12.45, -12.45 ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì€ ì •ìˆ˜ ì¤‘ ì œì¼ ìž‘ì€ ìˆ˜ë¥¼ ê³„ì‚°í•˜ëŠ” SQL ë¬¸ì„ ê°ê° ìž‘ì„±í•˜ì‹œì˜¤.
--- dual : ì‚°ìˆ  ì—°ì‚°, í•¨ìˆ˜ ê²°ê³¼ ë“±ì„ í™•ì¸í•´ë³¼ ìˆ˜ ìžˆëŠ” ìž„ì‹œ í…Œì´ë¸”
--- CEIL() - ì²œìž¥ : ì§€ì •í•œ ê°’ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì€ ì •ìˆ˜ ì¤‘ ê°€ìž¥ ìž‘ì€ ìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+-- 21. 12.45, -12.45 º¸´Ù Å©°Å³ª °°Àº Á¤¼ö Áß Á¦ÀÏ ÀÛÀº ¼ö¸¦ °è»êÇÏ´Â SQL ¹®À» °¢°¢ ÀÛ¼ºÇÏ½Ã¿À.
+-- dual : »ê¼ú ¿¬»ê, ÇÔ¼ö °á°ú µîÀ» È®ÀÎÇØº¼ ¼ö ÀÖ´Â ÀÓ½Ã Å×ÀÌºí
+-- CEIL() - ÃµÀå : ÁöÁ¤ÇÑ °ªº¸´Ù Å©°Å³ª °°Àº Á¤¼ö Áß °¡Àå ÀÛÀº ¼ö¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
 SELECT CEIL(12.45), CEIL(-12.45) FROM dual;
 
 
--- 22. 12.55ì™€ -12.55 ë³´ë‹¤ ìž‘ê±°ë‚˜ ê°™ì€ ì •ìˆ˜ ì¤‘ ê°€ìž¥ í° ìˆ˜ë¥¼ ê³„ì‚°í•˜ëŠ” SQL ë¬¸ì„ ê°ê° ìž‘ì„±í•˜ì‹œì˜¤.
--- FLOOR() - ë°”ë‹¥ : ì§€ì •í•œ ê°’ë³´ë‹¤ ìž‘ê±°ë‚˜ ê°™ì€ ì •ìˆ˜ ì¤‘ ê°€ìž¥ í° ìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+-- 22. 12.55¿Í -12.55 º¸´Ù ÀÛ°Å³ª °°Àº Á¤¼ö Áß °¡Àå Å« ¼ö¸¦ °è»êÇÏ´Â SQL ¹®À» °¢°¢ ÀÛ¼ºÇÏ½Ã¿À.
+-- FLOOR() - ¹Ù´Ú : ÁöÁ¤ÇÑ °ªº¸´Ù ÀÛ°Å³ª °°Àº Á¤¼ö Áß °¡Àå Å« ¼ö¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
 SELECT FLOOR(12.55), FLOOR(-12.55) FROM dual;
 
--- 23. ê° ì†Œë¬¸ì œì— ì œì‹œëœ ìˆ˜ì™€ ìžë¦¬ ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ 'ë°˜ì˜¬ë¦¼'í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ROUND(ê°’, ìžë¦¬ìˆ˜) : ì§€ì •í•œ ê°’ì„ í•´ë‹¹ ìžë¦¬ìˆ˜ì—ì„œ ë°˜ì˜¬ë¦¼í•˜ëŠ” í•¨ìˆ˜
+-- 23. °¢ ¼Ò¹®Á¦¿¡ Á¦½ÃµÈ ¼ö¿Í ÀÚ¸® ¼ö¸¦ ÀÌ¿ëÇÏ¿© '¹Ý¿Ã¸²'ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ROUND(°ª, ÀÚ¸®¼ö) : ÁöÁ¤ÇÑ °ªÀ» ÇØ´ç ÀÚ¸®¼ö¿¡¼­ ¹Ý¿Ã¸²ÇÏ´Â ÇÔ¼ö
 -- a  a  a  a  a.bbbb
---         -2 -1.0123(ì¸ë±ìŠ¤ê°€ ì´ë ‡ê²Œ ëœë‹¤.)
--- 0.54ë¥¼ ì†Œìˆ˜ì  ì•„ëž˜ ì²«ì§¸ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼í•˜ì‹œì˜¤.
+--         -2 -1.0123(ÀÎµ¦½º°¡ ÀÌ·¸°Ô µÈ´Ù.)
+-- 0.54¸¦ ¼Ò¼öÁ¡ ¾Æ·¡ Ã¹Â° ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²ÇÏ½Ã¿À.
 SELECT ROUND(0.54, 0) FROM dual;
--- 0.54 ë¥¼ ì†Œìˆ˜ì  ì•„ëž˜ ë‘˜ì§¸ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼í•˜ì‹œì˜¤.
+-- 0.54 ¸¦ ¼Ò¼öÁ¡ ¾Æ·¡ µÑÂ° ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²ÇÏ½Ã¿À.
 SELECT ROUND(0.54, 1) FROM dual;
--- 125.67 ì„ ì¼ì˜ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼í•˜ì‹œì˜¤.
+-- 125.67 À» ÀÏÀÇ ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²ÇÏ½Ã¿À.
 SELECT ROUND(125.67, -1) FROM dual;
--- 125.67 ì„ ì‹­ì˜ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼í•˜ì‹œì˜¤.
+-- 125.67 À» ½ÊÀÇ ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²ÇÏ½Ã¿À.
 SELECT ROUND(125.67, -2) FROM dual;
 
--- 24. ê° ì†Œë¬¸ì œì— ì œì‹œëœ ë‘ ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ 'ë‚˜ë¨¸ì§€'ë¥¼ êµ¬í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- MOD(A, B) : Aë¥¼ Bë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
--- 3ì„ 8ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ë¥¼ êµ¬í•˜ì‹œì˜¤.
+-- 24. °¢ ¼Ò¹®Á¦¿¡ Á¦½ÃµÈ µÎ ¼ö¸¦ ÀÌ¿ëÇÏ¿© '³ª¸ÓÁö'¸¦ ±¸ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- MOD(A, B) : A¸¦ B·Î ³ª´« ³ª¸ÓÁö¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+-- 3À» 8·Î ³ª´« ³ª¸ÓÁö¸¦ ±¸ÇÏ½Ã¿À.
 SELECT MOD(3, 8) FROM dual;
--- 30ì„ 4ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ë¥¼ êµ¬í•˜ì‹œì˜¤.
+-- 30À» 4·Î ³ª´« ³ª¸ÓÁö¸¦ ±¸ÇÏ½Ã¿À.
 SELECT MOD(30, 4) FROM dual;
 
--- 25. ê° ì†Œë¬¸ì œì— ì œì‹œëœ ë‘ ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ 'ì œê³±ìˆ˜'ë¥¼ êµ¬í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- POWER(A, B) : Aì˜ B ì œê³±
--- 2ì˜ 10ì œê³±ì„ êµ¬í•˜ì‹œì˜¤.
+-- 25. °¢ ¼Ò¹®Á¦¿¡ Á¦½ÃµÈ µÎ ¼ö¸¦ ÀÌ¿ëÇÏ¿© 'Á¦°ö¼ö'¸¦ ±¸ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- POWER(A, B) : AÀÇ B Á¦°ö
+-- 2ÀÇ 10Á¦°öÀ» ±¸ÇÏ½Ã¿À.
 SELECT POWER(2, 10) FROM dual;
--- 2ì˜ 31ì œê³±ì„ êµ¬í•˜ì‹œì˜¤.
+-- 2ÀÇ 31Á¦°öÀ» ±¸ÇÏ½Ã¿À.
 SELECT POWER(2, 31) FROM dual;
 
--- 26. ê° ì†Œë¬¸ì œì— ì œì‹œëœ ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ 'ì œê³±ê·¼'ì„ êµ¬í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- SQRT(A) : Aì˜ ì œê³±ê·¼(AëŠ” ì–‘ì˜ ì •ìˆ˜ì™€ ì‹¤ìˆ˜ë§Œ ì‚¬ìš© ê°€ëŠ¥)
--- 2ì˜ ì œê³±ê·¼ì„ êµ¬í•˜ì‹œì˜¤.
+-- 26. °¢ ¼Ò¹®Á¦¿¡ Á¦½ÃµÈ ¼ö¸¦ ÀÌ¿ëÇÏ¿© 'Á¦°ö±Ù'À» ±¸ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- SQRT(A) : AÀÇ Á¦°ö±Ù(A´Â ¾çÀÇ Á¤¼ö¿Í ½Ç¼ö¸¸ »ç¿ë °¡´É)
+-- 2ÀÇ Á¦°ö±ÙÀ» ±¸ÇÏ½Ã¿À.
 SELECT SQRT(2) FROM dual;
 
--- 100ì˜ ì œê³±ê·¼ì„ êµ¬í•˜ì‹œì˜¤.
+-- 100ÀÇ Á¦°ö±ÙÀ» ±¸ÇÏ½Ã¿À.
 SELECT SQRT(100) FROM dual;
 
--- 27. ê° ì†Œë¬¸ì œì— ì œì‹œëœ ìˆ˜ì™€ ìžë¦¬ ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ í•´ë‹¹ ìˆ˜ë¥¼ 'ì ˆì‚­'í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- TRUNC(ê°’, ìžë¦¬ìˆ˜) : ì§€ì •í•œ ê°’ì„ í•´ë‹¹ ìžë¦¬ìˆ˜ì—ì„œ ì ˆì‚­í•˜ëŠ” í•¨ìˆ˜
+-- 27. °¢ ¼Ò¹®Á¦¿¡ Á¦½ÃµÈ ¼ö¿Í ÀÚ¸® ¼ö¸¦ ÀÌ¿ëÇÏ¿© ÇØ´ç ¼ö¸¦ 'Àý»è'ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- TRUNC(°ª, ÀÚ¸®¼ö) : ÁöÁ¤ÇÑ °ªÀ» ÇØ´ç ÀÚ¸®¼ö¿¡¼­ Àý»èÇÏ´Â ÇÔ¼ö
 -- a  a  a  a  a.bbbb
---         -2 -1.0123(ì¸ë±ìŠ¤ê°€ ì´ë ‡ê²Œ ëœë‹¤.)
--- 527425.1234 ì„ ì†Œìˆ˜ì  ì•„ëž˜ ì²«ì§¸ ìžë¦¬ì—ì„œ ì ˆì‚­í•˜ì‹œì˜¤.
+--         -2 -1.0123(ÀÎµ¦½º°¡ ÀÌ·¸°Ô µÈ´Ù.)
+-- 527425.1234 À» ¼Ò¼öÁ¡ ¾Æ·¡ Ã¹Â° ÀÚ¸®¿¡¼­ Àý»èÇÏ½Ã¿À.
 SELECT TRUNC(527425.1234, 0) FROM dual;
--- 527425.1234 ì„ ì†Œìˆ˜ì  ì•„ëž˜ ë‘˜ì§¸ ìžë¦¬ì—ì„œ ì ˆì‚­í•˜ì‹œì˜¤.
+-- 527425.1234 À» ¼Ò¼öÁ¡ ¾Æ·¡ µÑÂ° ÀÚ¸®¿¡¼­ Àý»èÇÏ½Ã¿À.
 SELECT TRUNC(527425.1234, 1) FROM dual;
--- 527425.1234 ì„ ì¼ì˜ ìžë¦¬ì—ì„œ ì ˆì‚­í•˜ì‹œì˜¤.
+-- 527425.1234 À» ÀÏÀÇ ÀÚ¸®¿¡¼­ Àý»èÇÏ½Ã¿À.
 SELECT TRUNC(527425.1234, -1) FROM dual;
--- 527425.1234 ì„ ì‹­ì˜ ìžë¦¬ì—ì„œ ì ˆì‚­í•˜ì‹œì˜¤.
+-- 527425.1234 À» ½ÊÀÇ ÀÚ¸®¿¡¼­ Àý»èÇÏ½Ã¿À.
 SELECT TRUNC(527425.1234, -2) FROM dual;
 
--- 28. ê° ì†Œë¬¸ì œì— ì œì‹œëœ ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ 'ì ˆëŒ“ê°’'ì„ êµ¬í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ABS(A) : Aì˜ ì ˆëŒ“ê°’
--- -20 ì˜ ì ˆëŒ“ê°’ì„ êµ¬í•˜ì‹œì˜¤.
+-- 28. °¢ ¼Ò¹®Á¦¿¡ Á¦½ÃµÈ ¼ö¸¦ ÀÌ¿ëÇÏ¿© 'Àý´ñ°ª'À» ±¸ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ABS(A) : AÀÇ Àý´ñ°ª
+-- -20 ÀÇ Àý´ñ°ªÀ» ±¸ÇÏ½Ã¿À.
 SELECT ABS(-20) FROM dual;
---12.456 ì˜ ì ˆëŒ“ê°’ì„ êµ¬í•˜ì‹œì˜¤.
+--12.456 ÀÇ Àý´ñ°ªÀ» ±¸ÇÏ½Ã¿À.
 SELECT ABS(-12.456) FROM dual;
 
--- 29. ë¬¸ìžì—´ì„ ëŒ€ë¬¸ìž, ì†Œë¬¸ìž, ì²«ê¸€ìžë§Œ ëŒ€ë¬¸ìžë¡œ ë³€í™˜í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- UPPER() : ëª¨ë‘ ëŒ€ë¬¸ìžë¡œ ë³€í™˜
--- LOWER() : ëª¨ë‘ ì†Œë¬¸ìžë¡œ ë³€í™˜
--- INITCAP() : ì²« ê¸€ìžë§Œ ëŒ€ë¬¸ìž
-SELECT 'AlohA WoRlD~!' AS ì›ë¬¸
-        ,UPPER('AlohA WoRlD~!') AS ëŒ€ë¬¸ìž
-        ,LOWER('AlohA WoRlD~!') AS ì†Œë¬¸ìž
-        ,INITCAP('AlohA WoRlD~!') AS "ì²« ê¸€ìžë§Œ ëŒ€ë¬¸ìž"
+-- 29. ¹®ÀÚ¿­À» ´ë¹®ÀÚ, ¼Ò¹®ÀÚ, Ã¹±ÛÀÚ¸¸ ´ë¹®ÀÚ·Î º¯È¯ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- UPPER() : ¸ðµÎ ´ë¹®ÀÚ·Î º¯È¯
+-- LOWER() : ¸ðµÎ ¼Ò¹®ÀÚ·Î º¯È¯
+-- INITCAP() : Ã¹ ±ÛÀÚ¸¸ ´ë¹®ÀÚ
+SELECT 'AlohA WoRlD~!' AS ¿ø¹®
+        ,UPPER('AlohA WoRlD~!') AS ´ë¹®ÀÚ
+        ,LOWER('AlohA WoRlD~!') AS ¼Ò¹®ÀÚ
+        ,INITCAP('AlohA WoRlD~!') AS "Ã¹ ±ÛÀÚ¸¸ ´ë¹®ÀÚ"
 FROM dual;
 
--- 30. ë¬¸ìžì—´ì˜ ê¸€ìž ìˆ˜ì™€ ë°”ì´íŠ¸ ìˆ˜ë¥¼ ì¶œë ¥í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- LENGTH('ë¬¸ìžì—´') : ê¸€ìž ìˆ˜
--- LENGTHB('ë¬¸ìžì—´') : ë°”ì´íŠ¸ ìˆ˜
--- * ì˜ë¬¸, ìˆ«ìž, ë¹ˆ ì¹¸ : 1 byte
--- * í•œê¸€             : 3 byte
-SELECT LENGTH('ALOHA WORLD') AS "ê¸€ìž ìˆ˜"
-      ,LENGTHB('ALOHA WORLD') AS "ë°”ì´íŠ¸ ìˆ˜"
+-- 30. ¹®ÀÚ¿­ÀÇ ±ÛÀÚ ¼ö¿Í ¹ÙÀÌÆ® ¼ö¸¦ Ãâ·ÂÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- LENGTH('¹®ÀÚ¿­') : ±ÛÀÚ ¼ö
+-- LENGTHB('¹®ÀÚ¿­') : ¹ÙÀÌÆ® ¼ö
+-- * ¿µ¹®, ¼ýÀÚ, ºó Ä­ : 1 byte
+-- * ÇÑ±Û             : 3 byte
+SELECT LENGTH('ALOHA WORLD') AS "±ÛÀÚ ¼ö"
+      ,LENGTHB('ALOHA WORLD') AS "¹ÙÀÌÆ® ¼ö"
 FROM dual;
 
-SELECT LENGTH('ì•Œë¡œí•˜ ì›”ë“œ') AS "ê¸€ìž ìˆ˜"
-      ,LENGTHB('ì•Œë¡œí•˜ ì›”ë“œ') AS "ë°”ì´íŠ¸ ìˆ˜"
+SELECT LENGTH('¾Ë·ÎÇÏ ¿ùµå') AS "±ÛÀÚ ¼ö"
+      ,LENGTHB('¾Ë·ÎÇÏ ¿ùµå') AS "¹ÙÀÌÆ® ¼ö"
 FROM dual;
 
--- 31. <ì˜ˆì‹œ>ì™€ ê°™ì´ ê°ê° 'í•¨ìˆ˜'ì™€ 'ê¸°í˜¸'ë¥¼ ì´ìš©í•˜ì—¬ ë‘ ë¬¸ìžì—´ì„ ë³‘í•©í•˜ì—¬ ì¶œë ¥í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ë¬¸ìžì—´ 1 : 'ALOHA'
--- ë¬¸ìžì—´ 2 : 'WORLD'
-SELECT CONCAT('ALOHA', 'WORLD') AS í•¨ìˆ˜
-      ,'ALOHA' || 'WORLD' AS ê¸°í˜¸
+-- 31. <¿¹½Ã>¿Í °°ÀÌ °¢°¢ 'ÇÔ¼ö'¿Í '±âÈ£'¸¦ ÀÌ¿ëÇÏ¿© µÎ ¹®ÀÚ¿­À» º´ÇÕÇÏ¿© Ãâ·ÂÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ¹®ÀÚ¿­ 1 : 'ALOHA'
+-- ¹®ÀÚ¿­ 2 : 'WORLD'
+SELECT CONCAT('ALOHA', 'WORLD') AS ÇÔ¼ö
+      ,'ALOHA' || 'WORLD' AS ±âÈ£
 FROM dual;
 
--- 32. <ì˜ˆì‹œ>ì™€ ê°™ì´ ì£¼ì–´ì§„ ë¬¸ìžì—´ì˜ ì¼ë¶€ë§Œ ì¶œë ¥í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- SUBSTR(ë¬¸ìžì—´, ì‹œìž‘ë²ˆí˜¸, ê¸€ìž ìˆ˜)
+-- 32. <¿¹½Ã>¿Í °°ÀÌ ÁÖ¾îÁø ¹®ÀÚ¿­ÀÇ ÀÏºÎ¸¸ Ãâ·ÂÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- SUBSTR(¹®ÀÚ¿­, ½ÃÀÛ¹øÈ£, ±ÛÀÚ ¼ö)
 -- 'www.alohacampus.com'
 SELECT SUBSTR('www.alohacampus.com', 1, 3) AS "1"
       ,SUBSTR('www.alohacampus.com', 5, 11) AS "2"
@@ -298,154 +298,154 @@ SELECT SUBSTRB('www.alohacampus.com', 1, 3) AS "1"
       ,SUBSTRB('www.alohacampus.com', 5, 11) AS "2"
       ,SUBSTRB('www.alohacampus.com', -3, 3) AS "3"
 FROM dual;
--- 'www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com'
-SELECT SUBSTR('www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com', 1, 3) AS "1"
-      ,SUBSTR('www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com', 5, 6) AS "2"
-      ,SUBSTR('www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com', -3, 3) AS "3"
+-- 'www.¾Ë·ÎÇÏÄ·ÆÛ½º.com'
+SELECT SUBSTR('www.¾Ë·ÎÇÏÄ·ÆÛ½º.com', 1, 3) AS "1"
+      ,SUBSTR('www.¾Ë·ÎÇÏÄ·ÆÛ½º.com', 5, 6) AS "2"
+      ,SUBSTR('www.¾Ë·ÎÇÏÄ·ÆÛ½º.com', -3, 3) AS "3"
 FROM dual;
 
-SELECT SUBSTRB('www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com', 1, 3) AS "1"
-      ,SUBSTRB('www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com', 5, 6*3) AS "2"
-      ,SUBSTRB('www.ì•Œë¡œí•˜ìº í¼ìŠ¤.com', -3, 3) AS "3"
+SELECT SUBSTRB('www.¾Ë·ÎÇÏÄ·ÆÛ½º.com', 1, 3) AS "1"
+      ,SUBSTRB('www.¾Ë·ÎÇÏÄ·ÆÛ½º.com', 5, 6*3) AS "2"
+      ,SUBSTRB('www.¾Ë·ÎÇÏÄ·ÆÛ½º.com', -3, 3) AS "3"
 FROM dual;
 
--- 33. <ì˜ˆì‹œ>ì™€ ê°™ì´ ë¬¸ìžì—´ì—ì„œ 'íŠ¹ì • ë¬¸ìžì˜ ìœ„ì¹˜'ë¥¼ êµ¬í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- INSTR(ë¬¸ìžì—´, ì°¾ì„ ë¬¸ìž, ì‹œìž‘ ë²ˆí˜¸, ìˆœì„œ)
--- 'ALOHACAMPUS' ë¬¸ìžì—´ì—ì„œ 2ë²ˆì§¸ Aì˜ ìœ„ì¹˜ë¥¼ êµ¬í•˜ì‹œì˜¤.
-SELECT INSTR('ALOHACAMPUS', 'A', 1, 1) AS "1ë²ˆì§¸ A"
-      ,INSTR('ALOHACAMPUS', 'A', 1, 2) AS "2ë²ˆì§¸ A"
-      ,INSTR('ALOHACAMPUS', 'A', 1, 3) AS "3ë²ˆì§¸ A"
-      ,INSTR('ALOHACAMPUS', 'CAMPUS', 1, 1) AS "CAMPUS ìœ„ì¹˜"
+-- 33. <¿¹½Ã>¿Í °°ÀÌ ¹®ÀÚ¿­¿¡¼­ 'Æ¯Á¤ ¹®ÀÚÀÇ À§Ä¡'¸¦ ±¸ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- INSTR(¹®ÀÚ¿­, Ã£À» ¹®ÀÚ, ½ÃÀÛ ¹øÈ£, ¼ø¼­)
+-- 'ALOHACAMPUS' ¹®ÀÚ¿­¿¡¼­ 2¹øÂ° AÀÇ À§Ä¡¸¦ ±¸ÇÏ½Ã¿À.
+SELECT INSTR('ALOHACAMPUS', 'A', 1, 1) AS "1¹øÂ° A"
+      ,INSTR('ALOHACAMPUS', 'A', 1, 2) AS "2¹øÂ° A"
+      ,INSTR('ALOHACAMPUS', 'A', 1, 3) AS "3¹øÂ° A"
+      ,INSTR('ALOHACAMPUS', 'CAMPUS', 1, 1) AS "CAMPUS À§Ä¡"
 FROM dual;
 
--- 34. <ì˜ˆì‹œ>ì™€ ê°™ì´ ëŒ€ìƒ ë¬¸ìžì—´ì„ ì™¼ìª½/ì˜¤ë¥¸ìª½ì— ì¶œë ¥í•˜ê³  ë¹ˆê³µê°„ì„ íŠ¹ì • ë¬¸ìžë¡œ ì±„ìš°ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- LPAD(ë¬¸ìžì—´, ì¹¸ì˜ ìˆ˜, ì±„ìš¸ ë¬¸ìž) : ë¬¸ìžì—´ì˜ ì™¼ìª½ì— ì§€ì •í•œ ì¹¸ì„ í™•ë³´í•œ í›„ íŠ¹ì • ë¬¸ìžë¡œ ì±„ì›€
--- RPAD(ë¬¸ìžì—´, ì¹¸ì˜ ìˆ˜, ì±„ìš¸ ë¬¸ìž) : ë¬¸ìžì—´ì˜ ì˜¤ë¥¸ìª½ì— ì§€ì •í•œ ì¹¸ì„ í™•ë³´í•œ í›„ íŠ¹ì • ë¬¸ìžë¡œ ì±„ì›€
--- 'ALOHACAMPUS' ë¬¸ìžì—´ì—ì„œ #########ALOHACAMPUS, ALOHACAMPUS#########ë¡œ ë‚˜ì˜¤ë„ë¡
-SELECT LPAD('ALOHACAMPUS', 20, '#') AS "ì™¼ìª½"
-      ,RPAD('ALOHACAMPUS', 20, '#') AS "ì˜¤ë¥¸ìª½"
+-- 34. <¿¹½Ã>¿Í °°ÀÌ ´ë»ó ¹®ÀÚ¿­À» ¿ÞÂÊ/¿À¸¥ÂÊ¿¡ Ãâ·ÂÇÏ°í ºó°ø°£À» Æ¯Á¤ ¹®ÀÚ·Î Ã¤¿ì´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- LPAD(¹®ÀÚ¿­, Ä­ÀÇ ¼ö, Ã¤¿ï ¹®ÀÚ) : ¹®ÀÚ¿­ÀÇ ¿ÞÂÊ¿¡ ÁöÁ¤ÇÑ Ä­À» È®º¸ÇÑ ÈÄ Æ¯Á¤ ¹®ÀÚ·Î Ã¤¿ò
+-- RPAD(¹®ÀÚ¿­, Ä­ÀÇ ¼ö, Ã¤¿ï ¹®ÀÚ) : ¹®ÀÚ¿­ÀÇ ¿À¸¥ÂÊ¿¡ ÁöÁ¤ÇÑ Ä­À» È®º¸ÇÑ ÈÄ Æ¯Á¤ ¹®ÀÚ·Î Ã¤¿ò
+-- 'ALOHACAMPUS' ¹®ÀÚ¿­¿¡¼­ #########ALOHACAMPUS, ALOHACAMPUS#########·Î ³ª¿Àµµ·Ï
+SELECT LPAD('ALOHACAMPUS', 20, '#') AS "¿ÞÂÊ"
+      ,RPAD('ALOHACAMPUS', 20, '#') AS "¿À¸¥ÂÊ"
 FROM dual;
 
--- 35. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAMEê³¼ HIRE_DATE ë¥¼ ê²€ìƒ‰í•˜ë˜ <ì˜ˆì‹œ>ì™€ ê°™ì´ 'ë‚ ì§œ í˜•ì‹ì„ ì§€ì •'í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- TO_CHAR(ë°ì´í„°, 'ë‚ ì§œ/ìˆ«ìž í˜•ì‹') : íŠ¹ì • ë°ì´í„°ë¥¼ ë¬¸ìžì—´ í˜•ì‹ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
--- ë‚ ì§œí˜• -> ë¬¸ìží˜•ìœ¼ë¡œ ë³€í™˜í•´ë³´ìž
-SELECT first_name AS ì´ë¦„
+-- 35. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME°ú HIRE_DATE ¸¦ °Ë»öÇÏµÇ <¿¹½Ã>¿Í °°ÀÌ '³¯Â¥ Çü½ÄÀ» ÁöÁ¤'ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- TO_CHAR(µ¥ÀÌÅÍ, '³¯Â¥/¼ýÀÚ Çü½Ä') : Æ¯Á¤ µ¥ÀÌÅÍ¸¦ ¹®ÀÚ¿­ Çü½ÄÀ¸·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+-- ³¯Â¥Çü -> ¹®ÀÚÇüÀ¸·Î º¯È¯ÇØº¸ÀÚ
+SELECT first_name AS ÀÌ¸§
       ,hire_date
-      ,TO_CHAR(hire_date, 'YYYY-MM-DD (dy) HH:MI:SS') AS "hire_dateë¥¼ í˜•ì‹ ë³€í™˜"
+      ,TO_CHAR(hire_date, 'YYYY-MM-DD (dy) HH:MI:SS') AS "hire_date¸¦ Çü½Ä º¯È¯"
 FROM employees;
 
--- 36. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAMEê³¼ SALARY ë¥¼ ê²€ìƒ‰í•˜ë˜ <ì˜ˆì‹œ>ì™€ ê°™ì´ ë‚ ì§œ í˜•ì‹ì„ ì§€ì •í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ìˆ«ìží˜• -> ë¬¸ìží˜•ìœ¼ë¡œ ë³€í™˜í•´ë³´ìž
-SELECT first_name AS ì´ë¦„
-      ,salary AS ê¸‰ì—¬
-      ,TO_CHAR(salary, '$999,999,999.00') ê¸‰ì—¬
+-- 36. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME°ú SALARY ¸¦ °Ë»öÇÏµÇ <¿¹½Ã>¿Í °°ÀÌ ³¯Â¥ Çü½ÄÀ» ÁöÁ¤ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ¼ýÀÚÇü -> ¹®ÀÚÇüÀ¸·Î º¯È¯ÇØº¸ÀÚ
+SELECT first_name AS ÀÌ¸§
+      ,salary AS ±Þ¿©
+      ,TO_CHAR(salary, '$999,999,999.00') ±Þ¿©
 FROM employees;
 
--- 37. <ì˜ˆì‹œ> ì™€ ê°™ì´ ë¬¸ìží˜•ìœ¼ë¡œ ì£¼ì–´ì§„ ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ë³€í™˜í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- TO DATE(ë°ì´í„°, ë‚ ì§œí˜•ì‹) : ë¬¸ìží˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
--- * í•´ë‹¹ ë¬¸ìží˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜•ìœ¼ë¡œ ë¶„ì„í•  ìˆ˜ ìžˆëŠ” ìœ„ì¹˜ì™€ í˜•ì‹ì„ ì§€ì •í•´ì•¼ í•¨.
--- ë¬¸ìží˜• -> ë‚ ì§œí˜•
-SELECT 20230822 AS ë¬¸ìž
-      ,TO_DATE('20230822', 'YYYYMMDD') AS ë‚ ì§œ
-      ,TO_DATE('2023.08.22', 'YYYY.MM.DD') AS ë‚ ì§œ2
-      ,TO_DATE('2023-08-22', 'YYYY-MM-DD') AS ë‚ ì§œ3
-      ,TO_DATE('2023/08/22', 'YYYY/MM/DD') AS ë‚ ì§œ4
+-- 37. <¿¹½Ã> ¿Í °°ÀÌ ¹®ÀÚÇüÀ¸·Î ÁÖ¾îÁø µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î º¯È¯ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- TO DATE(µ¥ÀÌÅÍ, ³¯Â¥Çü½Ä) : ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+-- * ÇØ´ç ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥ÇüÀ¸·Î ºÐ¼®ÇÒ ¼ö ÀÖ´Â À§Ä¡¿Í Çü½ÄÀ» ÁöÁ¤ÇØ¾ß ÇÔ.
+-- ¹®ÀÚÇü -> ³¯Â¥Çü
+SELECT 20230822 AS ¹®ÀÚ
+      ,TO_DATE('20230822', 'YYYYMMDD') AS ³¯Â¥
+      ,TO_DATE('2023.08.22', 'YYYY.MM.DD') AS ³¯Â¥2
+      ,TO_DATE('2023-08-22', 'YYYY-MM-DD') AS ³¯Â¥3
+      ,TO_DATE('2023/08/22', 'YYYY/MM/DD') AS ³¯Â¥4
 FROM dual;
 
--- 38. <ì˜ˆì‹œ> ì™€ ê°™ì´ ë¬¸ìží˜•ìœ¼ë¡œ ì£¼ì–´ì§„ ë°ì´í„°ë¥¼ ìˆ«ìží˜• ë°ì´í„°ë¡œ ë³€í™˜í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- TO_NUMBER(ë°ì´í„°, í˜•ì‹) : ë¬¸ìží˜• ë°ì´í„°ë¥¼ ìˆ«ìží˜• ë°ì´í„°ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
-SELECT '1,200,000' AS ë¬¸ìž
-      ,TO_NUMBER('1,200,000', '999,999,999') AS ìˆ«ìž
+-- 38. <¿¹½Ã> ¿Í °°ÀÌ ¹®ÀÚÇüÀ¸·Î ÁÖ¾îÁø µ¥ÀÌÅÍ¸¦ ¼ýÀÚÇü µ¥ÀÌÅÍ·Î º¯È¯ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- TO_NUMBER(µ¥ÀÌÅÍ, Çü½Ä) : ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ¼ýÀÚÇü µ¥ÀÌÅÍ·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+SELECT '1,200,000' AS ¹®ÀÚ
+      ,TO_NUMBER('1,200,000', '999,999,999') AS ¼ýÀÚ
 FROM dual;
 
--- 39. ì–´ì œ, ì˜¤ëŠ˜, ë‚´ì¼ ë‚ ì§œë¥¼ ì¶œë ¥í•˜ì‹œì˜¤.
--- sysdate : í˜„ìž¬ ë‚ ì§œ/ ì‹œê°„ ì •ë³´ë¥¼ ê°€ì§€ê³ ìžˆëŠ” í‚¤ì›Œë“œ
+-- 39. ¾îÁ¦, ¿À´Ã, ³»ÀÏ ³¯Â¥¸¦ Ãâ·ÂÇÏ½Ã¿À.
+-- sysdate : ÇöÀç ³¯Â¥/ ½Ã°£ Á¤º¸¸¦ °¡Áö°íÀÖ´Â Å°¿öµå
 SELECT sysdate FROM dual;
 
-SELECT sysdate-1 AS ì–´ì œ
-      ,sysdate AS ì˜¤ëŠ˜
-      ,sysdate+1 AS ë‚´ì¼
+SELECT sysdate-1 AS ¾îÁ¦
+      ,sysdate AS ¿À´Ã
+      ,sysdate+1 AS ³»ÀÏ
 FROM dual;
 
--- 40. employees í…Œì´ë¸”ì—ì„œ ì´ë¦„, ìž…ì‚¬ì¼ìžì™€ ì˜¤ëŠ˜ ë‚ ì§œë¥¼ ì¶œë ¥í•˜ê³ , ê·¼ë¬´ ë‹¬ ìˆ˜ì™€ ê·¼ì† ì—°ìˆ˜ë¥¼ ì¶œë ¥í•˜ì‹œì˜¤.
--- MONTHS_BETWEEN(A, B) : ë‚ ì§œ Aë¶€í„° Bê¹Œì§€ì˜ ê°œì›” ìˆ˜ ì°¨ì´ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
--- (ë‹¨, A > B => ì¦‰, Aê°€ ë” ìµœê·¼ ë‚ ì§œë¡œ ì§€ì •ë˜ì–´ì•¼ ì–‘ìˆ˜ë¡œ ë°˜í™˜)
-SELECT first_name AS ì´ë¦„
-      ,TO_CHAR(hire_date, 'YYYY.MM.DD') AS ìž…ì‚¬ì¼ìž
-      ,TO_CHAR(sysdate, 'YYYY.MM.DD') AS "ì˜¤ëŠ˜ ë‚ ì§œ"
-      ,TRUNC(sysdate - hire_date, 0) AS "ê·¼ë¬´ ì¼ ìˆ˜"
-      ,TRUNC(MONTHS_BETWEEN(sysdate, hire_date)) || 'ê°œì›”' AS "ê·¼ë¬´ ë‹¬ ìˆ˜"
-      ,TRUNC((MONTHS_BETWEEN(sysdate, hire_date)) / 12) || 'ë…„' AS "ê·¼ì† ì—°ìˆ˜"
+-- 40. employees Å×ÀÌºí¿¡¼­ ÀÌ¸§, ÀÔ»çÀÏÀÚ¿Í ¿À´Ã ³¯Â¥¸¦ Ãâ·ÂÇÏ°í, ±Ù¹« ´Þ ¼ö¿Í ±Ù¼Ó ¿¬¼ö¸¦ Ãâ·ÂÇÏ½Ã¿À.
+-- MONTHS_BETWEEN(A, B) : ³¯Â¥ AºÎÅÍ B±îÁöÀÇ °³¿ù ¼ö Â÷ÀÌ¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+-- (´Ü, A > B => Áï, A°¡ ´õ ÃÖ±Ù ³¯Â¥·Î ÁöÁ¤µÇ¾î¾ß ¾ç¼ö·Î ¹ÝÈ¯)
+SELECT first_name AS ÀÌ¸§
+      ,TO_CHAR(hire_date, 'YYYY.MM.DD') AS ÀÔ»çÀÏÀÚ
+      ,TO_CHAR(sysdate, 'YYYY.MM.DD') AS "¿À´Ã ³¯Â¥"
+      ,TRUNC(sysdate - hire_date, 0) AS "±Ù¹« ÀÏ ¼ö"
+      ,TRUNC(MONTHS_BETWEEN(sysdate, hire_date)) || '°³¿ù' AS "±Ù¹« ´Þ ¼ö"
+      ,TRUNC((MONTHS_BETWEEN(sysdate, hire_date)) / 12) || '³â' AS "±Ù¼Ó ¿¬¼ö"
 FROM employees;
 
--- 41. ì˜¤ëŠ˜ ë‚ ì§œì™€ 6ê°œì›” í›„ì˜ ë‚ ì§œë¥¼ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ADD_MONTHS(ë‚ ì§œ, ê°œì›” ìˆ˜) : ì§€ì •í•œ ë‚ ì§œë¡œë¶€í„° í•´ë‹¹ ê°œì›” ìˆ˜ í›„ì˜ ë‚ ì§œë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
-SELECT sysdate AS ì˜¤ëŠ˜
-      ,ADD_MONTHS(sysdate, 6) AS "6ê°œì›” í›„"
+-- 41. ¿À´Ã ³¯Â¥¿Í 6°³¿ù ÈÄÀÇ ³¯Â¥¸¦ Ãâ·ÂÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ADD_MONTHS(³¯Â¥, °³¿ù ¼ö) : ÁöÁ¤ÇÑ ³¯Â¥·ÎºÎÅÍ ÇØ´ç °³¿ù ¼ö ÈÄÀÇ ³¯Â¥¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+SELECT sysdate AS ¿À´Ã
+      ,ADD_MONTHS(sysdate, 6) AS "6°³¿ù ÈÄ"
 FROM dual;
 
-SELECT '2023/07/25' AS "ê°œê°•"
-      ,ADD_MONTHS('2023/07/25', 6) AS "ì¢…ê°•"
+SELECT '2023/07/25' AS "°³°­"
+      ,ADD_MONTHS('2023/07/25', 6) AS "Á¾°­"
 FROM dual;
 
--- 42. ì˜¤ëŠ˜ ë‚ ì§œì™€ ì˜¤ëŠ˜ ì´í›„ ëŒì•„ì˜¤ëŠ” í† ìš”ì¼ì˜ ë‚ ì§œë¥¼ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- NEXT_DAY(ë‚ ì§œ, ìš”ì¼) : ì§€ì •í•œ ë‚ ì§œ ì´í›„ ëŒì•„ì˜¤ëŠ” ìš”ì¼ì„ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
--- ì¼ ì›” í™” ìˆ˜ ëª© ê¸ˆ í† 
+-- 42. ¿À´Ã ³¯Â¥¿Í ¿À´Ã ÀÌÈÄ µ¹¾Æ¿À´Â Åä¿äÀÏÀÇ ³¯Â¥¸¦ Ãâ·ÂÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- NEXT_DAY(³¯Â¥, ¿äÀÏ) : ÁöÁ¤ÇÑ ³¯Â¥ ÀÌÈÄ µ¹¾Æ¿À´Â ¿äÀÏÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+-- ÀÏ ¿ù È­ ¼ö ¸ñ ±Ý Åä
 -- 1  2  3  4 5  6  7
--- * ì¼ìš”ì¼ : 1, ì›”ìš”ì¼ : 2 ... í† ìš”ì¼ : 7
-SELECT sysdate AS "ì˜¤ëŠ˜"
-      , NEXT_DAY(sysdate, 7) AS "ë‹¤ìŒ í† ìš”ì¼"
+-- * ÀÏ¿äÀÏ : 1, ¿ù¿äÀÏ : 2 ... Åä¿äÀÏ : 7
+SELECT sysdate AS "¿À´Ã"
+      , NEXT_DAY(sysdate, 7) AS "´ÙÀ½ Åä¿äÀÏ"
 FROM dual;
 
-SELECT sysdate AS "ì˜¤ëŠ˜"
-      , NEXT_DAY(sysdate, 1) AS "ë‹¤ìŒ ì¼ìš”ì¼"
-      , NEXT_DAY(sysdate, 2) AS "ë‹¤ìŒ ì›”ìš”ì¼"
-      , NEXT_DAY(sysdate, 3) AS "ë‹¤ìŒ í™”ìš”ì¼"
-      , NEXT_DAY(sysdate, 4) AS "ë‹¤ìŒ ìˆ˜ìš”ì¼"
-      , NEXT_DAY(sysdate, 5) AS "ë‹¤ìŒ ëª©ìš”ì¼"
-      , NEXT_DAY(sysdate, 6) AS "ë‹¤ìŒ ê¸ˆìš”ì¼"
-      , NEXT_DAY(sysdate, 7) AS "ë‹¤ìŒ í† ìš”ì¼"
+SELECT sysdate AS "¿À´Ã"
+      , NEXT_DAY(sysdate, 1) AS "´ÙÀ½ ÀÏ¿äÀÏ"
+      , NEXT_DAY(sysdate, 2) AS "´ÙÀ½ ¿ù¿äÀÏ"
+      , NEXT_DAY(sysdate, 3) AS "´ÙÀ½ È­¿äÀÏ"
+      , NEXT_DAY(sysdate, 4) AS "´ÙÀ½ ¼ö¿äÀÏ"
+      , NEXT_DAY(sysdate, 5) AS "´ÙÀ½ ¸ñ¿äÀÏ"
+      , NEXT_DAY(sysdate, 6) AS "´ÙÀ½ ±Ý¿äÀÏ"
+      , NEXT_DAY(sysdate, 7) AS "´ÙÀ½ Åä¿äÀÏ"
 FROM dual;
 
--- 43. ì˜¤ëŠ˜ ë‚ ì§œì™€ ì›”ì´ˆ, ì›”ë§ ì¼ìžë¥¼ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- LAST_DAY(ë‚ ì§œ) : ì§€ì •í•œ ë‚ ì§œì™€ ë™ì¼í•œ ì›”ì˜ ì›”ë§ ì¼ìžë¥¼ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
+-- 43. ¿À´Ã ³¯Â¥¿Í ¿ùÃÊ, ¿ù¸» ÀÏÀÚ¸¦ ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- LAST_DAY(³¯Â¥) : ÁöÁ¤ÇÑ ³¯Â¥¿Í µ¿ÀÏÇÑ ¿ùÀÇ ¿ù¸» ÀÏÀÚ¸¦ º¯È¯ÇÏ´Â ÇÔ¼ö
 
--- ë‚ ì§œ ë°ì´í„° : XXXXX.YYYYYY
---  1970ë…„ 01ì›” 01ì¼ 00ì‹œ 00ë¶„ 00ì´ˆ 00ms => 2023ë…„ 8ì›” 22ì¼ ....
--- ì§€ë‚œ ì¼ìžë¥¼ ì •ìˆ˜ë¡œ ê³„ì‚°, ì‹œê°„ ì •ë³´ëŠ” ì†Œìˆ˜ ë¶€ë¶„ìœ¼ë¡œ ê³„ì‚°
--- XXXXX.YYYYYY ë‚ ì§œ ë°ì´í„°ë¥¼ ì›” ë‹¨ìœ„ë¡œ ì ˆì‚­í•˜ë©´ ì›”ì´ˆë¥¼ êµ¬í•  ìˆ˜ ìžˆë‹¤.
-SELECT TRUNC(sysdate, 'MM') ì›”ì´ˆ
-      ,sysdate ì˜¤ëŠ˜
-      ,LAST_DAY(sysdate) ì›”ë§
+-- ³¯Â¥ µ¥ÀÌÅÍ : XXXXX.YYYYYY
+--  1970³â 01¿ù 01ÀÏ 00½Ã 00ºÐ 00ÃÊ 00ms => 2023³â 8¿ù 22ÀÏ ....
+-- Áö³­ ÀÏÀÚ¸¦ Á¤¼ö·Î °è»ê, ½Ã°£ Á¤º¸´Â ¼Ò¼ö ºÎºÐÀ¸·Î °è»ê
+-- XXXXX.YYYYYY ³¯Â¥ µ¥ÀÌÅÍ¸¦ ¿ù ´ÜÀ§·Î Àý»èÇÏ¸é ¿ùÃÊ¸¦ ±¸ÇÒ ¼ö ÀÖ´Ù.
+SELECT TRUNC(sysdate, 'MM') ¿ùÃÊ
+      ,sysdate ¿À´Ã
+      ,LAST_DAY(sysdate) ¿ù¸»
 FROM dual;
 
--- 44. í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCT ë¥¼ ì¤‘ë³µì—†ì´ ê²€ìƒ‰í•˜ë˜, NULL ì´ë©´ 0ìœ¼ë¡œ ì¡°íšŒí•˜ê³  ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- NVL(ê°’, NULLì„ ëŒ€ì²´í•  ê°’)
--- : í•´ë‹¹ ê°’ì´ NULLì´ë©´ ì§€ì •ëœ ê°’ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
--- SELECTë¬¸ ì‹¤í–‰ ìˆœì„œ
+-- 44. Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT ¸¦ Áßº¹¾øÀÌ °Ë»öÇÏµÇ, NULL ÀÌ¸é 0À¸·Î Á¶È¸ÇÏ°í ³»¸²Â÷¼øÀ¸·Î Á¤·ÄÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- NVL(°ª, NULLÀ» ´ëÃ¼ÇÒ °ª)
+-- : ÇØ´ç °ªÀÌ NULLÀÌ¸é ÁöÁ¤µÈ °ªÀ¸·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+-- SELECT¹® ½ÇÇà ¼ø¼­
 -- FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY
-SELECT DISTINCT NVL(commission_pct, 0) AS "ì»¤ë¯¸ì…˜(%)"
+SELECT DISTINCT NVL(commission_pct, 0) AS "Ä¿¹Ì¼Ç(%)"
 FROM employees
 ORDER BY NVL(commission_pct, 0) DESC;
 
--- ì¡°íšŒí•œ ì»¬ëŸ¼ì˜ ë³„ì¹­ìœ¼ë¡œ ORDER BY ì ˆì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìžˆë‹¤. ex) "ì»¤ë¯¸ì…˜(%)"
-SELECT DISTINCT NVL(commission_pct, 0) AS "ì»¤ë¯¸ì…˜(%)"
+-- Á¶È¸ÇÑ ÄÃ·³ÀÇ º°ÄªÀ¸·Î ORDER BY Àý¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ´Ù. ex) "Ä¿¹Ì¼Ç(%)"
+SELECT DISTINCT NVL(commission_pct, 0) AS "Ä¿¹Ì¼Ç(%)"
 FROM employees
-ORDER BY "ì»¤ë¯¸ì…˜(%)" DESC;
+ORDER BY "Ä¿¹Ì¼Ç(%)" DESC;
 
--- 45. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME, SALARY, COMMISSION_PCT ì†ì„±ì„ ì´ìš©í•˜ì—¬ <ì˜ˆì‹œ>ì™€ ê°™ì´ SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- NVL2(ê°’, NULLì´ ì•„ë‹ ë•Œ ê°’, NULLì¼ ë•Œ ê°’)
-SELECT first_name ì´ë¦„
-      ,salary ê¸‰ì—¬
+-- 45. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME, SALARY, COMMISSION_PCT ¼Ó¼ºÀ» ÀÌ¿ëÇÏ¿© <¿¹½Ã>¿Í °°ÀÌ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- NVL2(°ª, NULLÀÌ ¾Æ´Ò ¶§ °ª, NULLÀÏ ¶§ °ª)
+SELECT first_name ÀÌ¸§
+      ,salary ±Þ¿©
       ,commission_pct
-      ,NVL(commission_pct, 0) ì»¤ë¯¸ì…˜
-      ,salary + (salary * NVL(commission_pct, 0)) ìµœì¢…ê¸‰ì—¬
-      ,NVL2(commission_pct, salary + (salary * commission_pct), salary) ìµœì¢…ê¸‰ì—¬2
+      ,NVL(commission_pct, 0) Ä¿¹Ì¼Ç
+      ,salary + (salary * NVL(commission_pct, 0)) ÃÖÁ¾±Þ¿©
+      ,NVL2(commission_pct, salary + (salary * commission_pct), salary) ÃÖÁ¾±Þ¿©2
 FROM employees;
 
--- 46.í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME, DEPARTMENT_ID ì†ì„±ì„ ì´ìš©í•˜ì—¬ <ì˜ˆì‹œ>ì™€ ê°™ì´ SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- DECODE(ì»¬ëŸ¼ëª…, ì¡°ê±´ê°’1, ë°˜í™˜ê°’1, ì¡°ê±´ê°’2, ë°˜í™˜ê°’2, ...) : ì§€ì •í•œ ì»¬ëŸ¼ì˜ ê°’ì´ ì¡°ê±´ê°’ì— ì¼ì¹˜í•˜ë©´ ë°”ë¡œ ë’¤ì˜ ë°˜í™˜ê°’ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
-SELECT first_name ì´ë¦„
+-- 46.Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME, DEPARTMENT_ID ¼Ó¼ºÀ» ÀÌ¿ëÇÏ¿© <¿¹½Ã>¿Í °°ÀÌ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- DECODE(ÄÃ·³¸í, Á¶°Ç°ª1, ¹ÝÈ¯°ª1, Á¶°Ç°ª2, ¹ÝÈ¯°ª2, ...) : ÁöÁ¤ÇÑ ÄÃ·³ÀÇ °ªÀÌ Á¶°Ç°ª¿¡ ÀÏÄ¡ÇÏ¸é ¹Ù·Î µÚÀÇ ¹ÝÈ¯°ªÀ» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+SELECT first_name ÀÌ¸§
       ,DECODE(department_id, 10, 'Administration',
                              20, 'Marketing',
                              30, 'Purchasing',
@@ -456,19 +456,19 @@ SELECT first_name ì´ë¦„
                              80, 'Sales',
                              90, 'Execution',
                              100, 'Finance'
-                             ) ë¶€ì„œ
+                             ) ºÎ¼­
 FROM employees;
 
 SELECT *
 FROM departments;
 
--- 47. í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME, DEPARTMENT_ID ì†ì„±ì„ ì´ìš©í•˜ì—¬ <ì˜ˆì‹œ>ì™€ ê°™ì´ SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- CASE : ì¡°ê±´ì‹ì„ ë§Œì¡±í•  ë•Œ, ì¶œë ¥í•  ê°’ì„ ì§€ì •í•˜ëŠ” êµ¬ë¬¸
+-- 47. Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME, DEPARTMENT_ID ¼Ó¼ºÀ» ÀÌ¿ëÇÏ¿© <¿¹½Ã>¿Í °°ÀÌ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- CASE : Á¶°Ç½ÄÀ» ¸¸Á·ÇÒ ¶§, Ãâ·ÂÇÒ °ªÀ» ÁöÁ¤ÇÏ´Â ±¸¹®
 -- CASE
---      WHEN ì¡°ê±´ì‹ THEN ë°˜í™˜ê°’
---      WHEN ì¡°ê±´ì‹ THEN ë°˜í™˜ê°’
+--      WHEN Á¶°Ç½Ä THEN ¹ÝÈ¯°ª
+--      WHEN Á¶°Ç½Ä THEN ¹ÝÈ¯°ª
 -- END
-SELECT first_name ì´ë¦„
+SELECT first_name ÀÌ¸§
       ,CASE WHEN department_id = 10 THEN 'Administration'
             WHEN department_id = 20 THEN 'Marketing'
             WHEN department_id = 30 THEN 'Purchasing'
@@ -479,44 +479,44 @@ SELECT first_name ì´ë¦„
             WHEN department_id = 80 THEN 'Sales'
             WHEN department_id = 90 THEN 'Execution'
             WHEN department_id = 100 THEN 'Finance'
-       End ë¶€ì„œ
+       End ºÎ¼­
 FROM employees;
 
--- 48. í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì› ìˆ˜ë¥¼ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- COUNT(ì»¬ëŸ¼ëª…) : ì»¬ëŸ¼ì„ ì§€ì •í•˜ì—¬ NULLì„ ì œì™¸í•œ ë°ì´í„° ê°œìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
--- NULLì´ ì—†ëŠ” ë°ì´í„°ë¼ë©´ ì–´ë–¤ ì»¬ëŸ¼ì„ ì§€ì •í•˜ë”ë¼ë„ ê°œìˆ˜ê°€ ê°™ê¸° ë•Œë¬¸ì— ì¼ë°˜ì ìœ¼ë¡œ COUNT(*)ë¡œ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤.
-SELECT COUNT(*) "ì‚¬ì› ìˆ˜"
-      ,COUNT(commission_pct) "ì»¤ë¯¸ì…˜ ë°›ëŠ” ì‚¬ì› ìˆ˜"
-      ,COUNT(department_id) "ë¶€ì„œê°€ ìžˆëŠ” ì‚¬ì› ìˆ˜"
+-- 48. Å×ÀÌºí EMPLOYEES ÀÇ »ç¿ø ¼ö¸¦ ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- COUNT(ÄÃ·³¸í) : ÄÃ·³À» ÁöÁ¤ÇÏ¿© NULLÀ» Á¦¿ÜÇÑ µ¥ÀÌÅÍ °³¼ö¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+-- NULLÀÌ ¾ø´Â µ¥ÀÌÅÍ¶ó¸é ¾î¶² ÄÃ·³À» ÁöÁ¤ÇÏ´õ¶óµµ °³¼ö°¡ °°±â ¶§¹®¿¡ ÀÏ¹ÝÀûÀ¸·Î COUNT(*)·Î °³¼ö¸¦ ±¸ÇÑ´Ù.
+SELECT COUNT(*) "»ç¿ø ¼ö"
+      ,COUNT(commission_pct) "Ä¿¹Ì¼Ç ¹Þ´Â »ç¿ø ¼ö"
+      ,COUNT(department_id) "ºÎ¼­°¡ ÀÖ´Â »ç¿ø ¼ö"
 FROM employees;
 
--- 49. í…Œì´ë¸” EMPLOYEES ì˜ ìµœê³ ê¸‰ì—¬, ìµœì €ê¸‰ì—¬ë¥¼ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 49. Å×ÀÌºí EMPLOYEES ÀÇ ÃÖ°í±Þ¿©, ÃÖÀú±Þ¿©¸¦ ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 -- MAX, MIN
-SELECT MAX(salary) ìµœê³ ê¸‰ì—¬
-      ,MIN(salary) ìµœì €ê¸‰ì—¬
+SELECT MAX(salary) ÃÖ°í±Þ¿©
+      ,MIN(salary) ÃÖÀú±Þ¿©
 FROM employees;
 
--- 50. í…Œì´ë¸” EMPLOYEES ì˜ ê¸‰ì—¬í•©ê³„, ê¸‰ì—¬í‰ê· ì„ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- SUM() : í•©ê³„
--- AVERAGE() : í‰ê· 
-SELECT SUM(salary) ê¸‰ì—¬í•©ê³„
-      ,TRUNC(AVG(salary)) ê¸‰ì—¬í‰ê· 
+-- 50. Å×ÀÌºí EMPLOYEES ÀÇ ±Þ¿©ÇÕ°è, ±Þ¿©Æò±ÕÀ» ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- SUM() : ÇÕ°è
+-- AVERAGE() : Æò±Õ
+SELECT SUM(salary) ±Þ¿©ÇÕ°è
+      ,TRUNC(AVG(salary)) ±Þ¿©Æò±Õ
 FROM employees;
 
--- 51. í…Œì´ë¸” EMPLOYEES ì˜ ê¸‰ì—¬í‘œì¤€íŽ¸ìžì™€ ê¸‰ì—¬ë¶„ì‚°ì„ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- STDDEV() : í‘œì¤€ íŽ¸ì°¨
--- VARIANCE() : ê¸‰ì—¬ë¶„ì‚°
-SELECT ROUND(STDDEV(salary), 2) ê¸‰ì—¬í‘œì¤€íŽ¸ì°¨
-      ,ROUND(VARIANCE(salary), 2) ê¸‰ì—¬ë¶„ì‚°
+-- 51. Å×ÀÌºí EMPLOYEES ÀÇ ±Þ¿©Ç¥ÁØÆíÀÚ¿Í ±Þ¿©ºÐ»êÀ» ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- STDDEV() : Ç¥ÁØ ÆíÂ÷
+-- VARIANCE() : ±Þ¿©ºÐ»ê
+SELECT ROUND(STDDEV(salary), 2) ±Þ¿©Ç¥ÁØÆíÂ÷
+      ,ROUND(VARIANCE(salary), 2) ±Þ¿©ºÐ»ê
 FROM employees;
 
--- 52. MS_STUDENT í…Œì´ë¸”ì„ ìƒì„±í•˜ì‹œì˜¤.
--- * í…Œì´ë¸” ìƒì„±
+-- 52. MS_STUDENT Å×ÀÌºíÀ» »ý¼ºÇÏ½Ã¿À.
+-- * Å×ÀÌºí »ý¼º
 /*
-    CREATE TABLE í…Œì´ë¸”ëª… (
-        ì»¬ëŸ¼ëª…1    íƒ€ìž…  [DEFAULT ê¸°ë³¸ê°’]  [NOT NULL/NULL] [ì œì•½ì¡°ê±´],
-        ì»¬ëŸ¼ëª…2    íƒ€ìž…  [DEFAULT ê¸°ë³¸ê°’]  [NOT NULL/NULL] [ì œì•½ì¡°ê±´],
-        ì»¬ëŸ¼ëª…3    íƒ€ìž…  [DEFAULT ê¸°ë³¸ê°’]  [NOT NULL/NULL] [ì œì•½ì¡°ê±´],
+    CREATE TABLE Å×ÀÌºí¸í (
+        ÄÃ·³¸í1    Å¸ÀÔ  [DEFAULT ±âº»°ª]  [NOT NULL/NULL] [Á¦¾àÁ¶°Ç],
+        ÄÃ·³¸í2    Å¸ÀÔ  [DEFAULT ±âº»°ª]  [NOT NULL/NULL] [Á¦¾àÁ¶°Ç],
+        ÄÃ·³¸í3    Å¸ÀÔ  [DEFAULT ±âº»°ª]  [NOT NULL/NULL] [Á¦¾àÁ¶°Ç],
         ...
     );
 */
@@ -531,70 +531,70 @@ CREATE TABLE MS_STUDENT (
     ,MJ_NO      NUMBER          NOT NULL
     ,REG_DATE   DATE    DEFAULT sysdate NOT NULL
     ,UPD_DATE   DATE    DEFAULT sysdate NOT NULL
-    ,ETC        VARCHAR(1000)   DEFAULT 'ì—†ìŒ'    NULL
+    ,ETC        VARCHAR(1000)   DEFAULT '¾øÀ½'    NULL
 );
 
-COMMENT ON TABLE MS_STUDENT IS 'í•™ìƒë“¤ì˜ ì •ë³´ë¥¼ ê´€ë¦¬í•œë‹¤.';
-COMMENT ON COLUMN MS_STUDENT.ST_NO IS 'í•™ìƒ ë²ˆí˜¸';
-COMMENT ON COLUMN MS_STUDENT.NAME IS 'ì´ë¦„';
-COMMENT ON COLUMN MS_STUDENT.CTZ_NO IS 'ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸';
-COMMENT ON COLUMN MS_STUDENT.EMAIL IS 'ì´ë©”ì¼';
-COMMENT ON COLUMN MS_STUDENT.ADDRESS IS 'ì£¼ì†Œ';
-COMMENT ON COLUMN MS_STUDENT.DEPT_NO IS 'í•™ë¶€ ë²ˆí˜¸';
-COMMENT ON COLUMN MS_STUDENT.MJ_NO IS 'ì „ê³µ ë²ˆí˜¸';
-COMMENT ON COLUMN MS_STUDENT.REG_DATE IS 'ë“±ë¡ ì¼ìž';
-COMMENT ON COLUMN MS_STUDENT.UPD_DATE IS 'ìˆ˜ì • ì¼ìž';
-COMMENT ON COLUMN MS_STUDENT.ETC IS 'íŠ¹ì´ì‚¬í•­';
+COMMENT ON TABLE MS_STUDENT IS 'ÇÐ»ýµéÀÇ Á¤º¸¸¦ °ü¸®ÇÑ´Ù.';
+COMMENT ON COLUMN MS_STUDENT.ST_NO IS 'ÇÐ»ý ¹øÈ£';
+COMMENT ON COLUMN MS_STUDENT.NAME IS 'ÀÌ¸§';
+COMMENT ON COLUMN MS_STUDENT.CTZ_NO IS 'ÁÖ¹Îµî·Ï¹øÈ£';
+COMMENT ON COLUMN MS_STUDENT.EMAIL IS 'ÀÌ¸ÞÀÏ';
+COMMENT ON COLUMN MS_STUDENT.ADDRESS IS 'ÁÖ¼Ò';
+COMMENT ON COLUMN MS_STUDENT.DEPT_NO IS 'ÇÐºÎ ¹øÈ£';
+COMMENT ON COLUMN MS_STUDENT.MJ_NO IS 'Àü°ø ¹øÈ£';
+COMMENT ON COLUMN MS_STUDENT.REG_DATE IS 'µî·Ï ÀÏÀÚ';
+COMMENT ON COLUMN MS_STUDENT.UPD_DATE IS '¼öÁ¤ ÀÏÀÚ';
+COMMENT ON COLUMN MS_STUDENT.ETC IS 'Æ¯ÀÌ»çÇ×';
 
 DROP TABLE MS_STUDENT;
 
--- 53. MS_STUDENT í…Œì´ë¸”ì— ì„±ë³„, ìž¬ì , ìž…í•™ì¼ìž, ì¡¸ì—…ì¼ìž ì†ì„±ì„ ì¶”ê°€í•˜ì‹œì˜¤.
--- í…Œì´ë¸”ì— ì†ì„± ì¶”ê°€
--- ALTER TABLE í…Œì´ë¸”ëª… ADD ì»¬ëŸ¼ëª… íƒ€ìž… DEFAULT ê¸°ë³¸ê°’ [NOT NULL];
-ALTER TABLE MS_STUDENT ADD GENDER CHAR(6) DEFAULT 'ê¸°íƒ€' NOT NULL;
-COMMENT ON COLUMN MS_STUDENT.GENDER IS 'ì„±ë³„';
+-- 53. MS_STUDENT Å×ÀÌºí¿¡ ¼ºº°, ÀçÀû, ÀÔÇÐÀÏÀÚ, Á¹¾÷ÀÏÀÚ ¼Ó¼ºÀ» Ãß°¡ÇÏ½Ã¿À.
+-- Å×ÀÌºí¿¡ ¼Ó¼º Ãß°¡
+-- ALTER TABLE Å×ÀÌºí¸í ADD ÄÃ·³¸í Å¸ÀÔ DEFAULT ±âº»°ª [NOT NULL];
+ALTER TABLE MS_STUDENT ADD GENDER CHAR(6) DEFAULT '±âÅ¸' NOT NULL;
+COMMENT ON COLUMN MS_STUDENT.GENDER IS '¼ºº°';
 
-ALTER TABLE MS_STUDENT ADD STATUS VARCHAR2(10) DEFAULT 'ëŒ€ê¸°' NOT NULL;
-COMMENT ON COLUMN MS_STUDENT.STATUS IS 'ìž¬ì ';
+ALTER TABLE MS_STUDENT ADD STATUS VARCHAR2(10) DEFAULT '´ë±â' NOT NULL;
+COMMENT ON COLUMN MS_STUDENT.STATUS IS 'ÀçÀû';
 
 ALTER TABLE MS_STUDENT ADD ADM_DATE DATE NULL;
-COMMENT ON COLUMN MS_STUDENT.ADM_DATE IS 'ìž…í•™ì¼ìž';
+COMMENT ON COLUMN MS_STUDENT.ADM_DATE IS 'ÀÔÇÐÀÏÀÚ';
 
 ALTER TABLE MS_STUDENT ADD GRD_DATE DATE NULL;
-COMMENT ON COLUMN MS_STUDENT.GRD_DATE IS 'ì¡¸ì—…ì¼ìž';
+COMMENT ON COLUMN MS_STUDENT.GRD_DATE IS 'Á¹¾÷ÀÏÀÚ';
 
--- í…Œì´ë¸” ì†ì„± ì‚­ì œ
--- ALTER TABLE í…Œì´ë¸”ëª… DROP COLUMN ì»¬ëŸ¼ëª…;
+-- Å×ÀÌºí ¼Ó¼º »èÁ¦
+-- ALTER TABLE Å×ÀÌºí¸í DROP COLUMN ÄÃ·³¸í;
 ALTER TABLE MS_STUDENT DROP COLUMN GENDER;
 ALTER TABLE MS_STUDENT DROP COLUMN STATUS;
 ALTER TABLE MS_STUDENT DROP COLUMN ADM_DATE;
 ALTER TABLE MS_STUDENT DROP COLUMN GRD_DATE;
 
--- 54. MS_STUDENT í…Œì´ë¸”ì˜ CTZ_NO ì†ì„±ì„ BIRTHë¡œ ì´ë¦„ì„ ë³€ê²½í•˜ê³  ë°ì´í„° íƒ€ìž…ì„ DATEë¡œ ìˆ˜ì •í•˜ì‹œì˜¤.
--- ê·¸ë¦¬ê³  ì„¤ëª…ë„ 'ìƒë…„ì›”ì¼'ë¡œ ë³€ê²½í•˜ì‹œì˜¤.
+-- 54. MS_STUDENT Å×ÀÌºíÀÇ CTZ_NO ¼Ó¼ºÀ» BIRTH·Î ÀÌ¸§À» º¯°æÇÏ°í µ¥ÀÌÅÍ Å¸ÀÔÀ» DATE·Î ¼öÁ¤ÇÏ½Ã¿À.
+-- ±×¸®°í ¼³¸íµµ '»ý³â¿ùÀÏ'·Î º¯°æÇÏ½Ã¿À.
 ALTER TABLE MS_STUDENT RENAME COLUMN CTZ_NO TO BIRTH;
 ALTER TABLE MS_STUDENT MODIFY BIRTH DATE;
-COMMENT ON COLUMN MS_STUDENT.BIRTH IS 'ìƒë…„ì›”ì¼';
+COMMENT ON COLUMN MS_STUDENT.BIRTH IS '»ý³â¿ùÀÏ';
 
--- ì†ì„± ë³€ê²½ - íƒ€ìž… ë³€ê²½
+-- ¼Ó¼º º¯°æ - Å¸ÀÔ º¯°æ
 ALTER TABLE MS_STUDENT MODIFY BIRTH DATE;
--- ì†ì„± ë³€ê²½ - NULL ë³€ê²½
+-- ¼Ó¼º º¯°æ - NULL º¯°æ
 ALTER TABLE MS_STUDENT MODIFY BIRTH NULL;
--- ì†ì„± ë³€ê²½ - DEFAULT ë³€ê²½
+-- ¼Ó¼º º¯°æ - DEFAULT º¯°æ
 ALTER TABLE MS_STUDENT MODIFY BIRTH DEFAULT sysdata;
 
--- ë™ì‹œì— ì ìš© ê°€ëŠ¥
+-- µ¿½Ã¿¡ Àû¿ë °¡´É
 ALTER TABLE MS_STUDENT MODIFY BIRTH DATE DEFAULT sysdate NOT NULL;
 
 DESC MS_STUDENT;
 
--- 55. MS_STUDENT í…Œì´ë¸”ì˜ í•™ë¶€ë²ˆí˜¸ ì†ì„±ì„ ì‚­ì œí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 55. MS_STUDENT Å×ÀÌºíÀÇ ÇÐºÎ¹øÈ£ ¼Ó¼ºÀ» »èÁ¦ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 ALTER TABLE MS_STUDENT DROP COLUMN DEPT_NO;
 
--- 56. MS_STUDENT í…Œì´ë¸”ì„ ì‚­ì œí•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 56. MS_STUDENT Å×ÀÌºíÀ» »èÁ¦ÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 DROP TABLE MS_STUDENT;
 
--- 57. ì•„ëž˜ <ì˜ˆì‹œ>ì˜ TABLE ê¸°ìˆ ì„œë¥¼ ì°¸ê³ í•˜ì—¬ MS_STUDENT í…Œì´ë¸”ì„ ìƒì„±í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 57. ¾Æ·¡ <¿¹½Ã>ÀÇ TABLE ±â¼ú¼­¸¦ Âü°íÇÏ¿© MS_STUDENT Å×ÀÌºíÀ» »ý¼ºÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 CREATE TABLE MS_STUDENT (
      ST_NO      NUMBER          NOT NULL   PRIMARY KEY
     ,NAME       VARCHAR2(20)    NOT NULL
@@ -602,144 +602,144 @@ CREATE TABLE MS_STUDENT (
     ,EMAIL      VARCHAR2(100)   NOT NULL
     ,ADDRESS    VARCHAR2(1000)  NULL
     ,MJ_NO      VARCHAR2(10)    NOT NULL
-    ,GENDER     CHAR(6)         DEFAULT 'ê¸°íƒ€'    NOT NULL
-    ,STATUS     VARCHAR2(10)    DEFAULT 'ëŒ€ê¸°'    NOT NULL
+    ,GENDER     CHAR(6)         DEFAULT '±âÅ¸'    NOT NULL
+    ,STATUS     VARCHAR2(10)    DEFAULT '´ë±â'    NOT NULL
     ,ADM_DATE   DATE    NULL
     ,GRD_DATE   DATE    NULL
     ,REG_DATE   DATE    DEFAULT sysdate NOT NULL
     ,UPD_DATE   DATE    DEFAULT sysdate NOT NULL
-    ,ETC        VARCHAR2(1000)  DEFAULT 'ì—†ìŒ' NULL
+    ,ETC        VARCHAR2(1000)  DEFAULT '¾øÀ½' NULL
 );
 
-COMMENT ON TABLE MS_STUDENT IS 'í•™ìƒë“¤ì˜ ì •ë³´ë¥¼ ê´€ë¦¬í•œë‹¤.';
-COMMENT ON COLUMN MS_STUDENT.ST_NO IS 'í•™ìƒ ë²ˆí˜¸';
-COMMENT ON COLUMN MS_STUDENT.NAME IS 'ì´ë¦„';
-COMMENT ON COLUMN MS_STUDENT.BIRTH IS 'ìƒë…„ì›”ì¼';
-COMMENT ON COLUMN MS_STUDENT.EMAIL IS 'ì´ë©”ì¼';
-COMMENT ON COLUMN MS_STUDENT.ADDRESS IS 'ì£¼ì†Œ';
-COMMENT ON COLUMN MS_STUDENT.MJ_NO IS 'ì „ê³µë²ˆí˜¸';
+COMMENT ON TABLE MS_STUDENT IS 'ÇÐ»ýµéÀÇ Á¤º¸¸¦ °ü¸®ÇÑ´Ù.';
+COMMENT ON COLUMN MS_STUDENT.ST_NO IS 'ÇÐ»ý ¹øÈ£';
+COMMENT ON COLUMN MS_STUDENT.NAME IS 'ÀÌ¸§';
+COMMENT ON COLUMN MS_STUDENT.BIRTH IS '»ý³â¿ùÀÏ';
+COMMENT ON COLUMN MS_STUDENT.EMAIL IS 'ÀÌ¸ÞÀÏ';
+COMMENT ON COLUMN MS_STUDENT.ADDRESS IS 'ÁÖ¼Ò';
+COMMENT ON COLUMN MS_STUDENT.MJ_NO IS 'Àü°ø¹øÈ£';
 
-COMMENT ON COLUMN MS_STUDENT.GENDER IS 'ì„±ë³„';
-COMMENT ON COLUMN MS_STUDENT.STATUS IS 'ìž¬ì ';
-COMMENT ON COLUMN MS_STUDENT.ADM_DATE IS 'ìž…í•™ì¼ìž';
-COMMENT ON COLUMN MS_STUDENT.GRD_DATE IS 'ì¡¸ì—…ì¼ìž';
+COMMENT ON COLUMN MS_STUDENT.GENDER IS '¼ºº°';
+COMMENT ON COLUMN MS_STUDENT.STATUS IS 'ÀçÀû';
+COMMENT ON COLUMN MS_STUDENT.ADM_DATE IS 'ÀÔÇÐÀÏÀÚ';
+COMMENT ON COLUMN MS_STUDENT.GRD_DATE IS 'Á¹¾÷ÀÏÀÚ';
 
-COMMENT ON COLUMN MS_STUDENT.REG_DATE IS 'ë“±ë¡ì¼ìž';
-COMMENT ON COLUMN MS_STUDENT.UPD_DATE IS 'ìˆ˜ì •ì¼ìž';
-COMMENT ON COLUMN MS_STUDENT.ETC IS 'íŠ¹ì´ì‚¬í•­';
+COMMENT ON COLUMN MS_STUDENT.REG_DATE IS 'µî·ÏÀÏÀÚ';
+COMMENT ON COLUMN MS_STUDENT.UPD_DATE IS '¼öÁ¤ÀÏÀÚ';
+COMMENT ON COLUMN MS_STUDENT.ETC IS 'Æ¯ÀÌ»çÇ×';
 
--- 58. ì•„ëž˜ <ì˜ˆì‹œ> ë¥¼ ì°¸ê³ í•˜ì—¬ MS_STUDENT í…Œì´ë¸”ì— ë°ì´í„°ë¥¼ ì‚½ìž…í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ë°ì´í„° ì‚½ìž…(INSERT)
+-- 58. ¾Æ·¡ <¿¹½Ã> ¸¦ Âü°íÇÏ¿© MS_STUDENT Å×ÀÌºí¿¡ µ¥ÀÌÅÍ¸¦ »ðÀÔÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- µ¥ÀÌÅÍ »ðÀÔ(INSERT)
 INSERT INTO MS_STUDENT (ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, GENDER
                     , STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC)
-VALUES('20180001', 'ìµœì„œì•„', '991005', 'csa@univ.ac.kr', 'ì„œìš¸', 'I01', 'ì—¬'
-        , 'ìž¬í•™', '2018/03/01', NULL, sysdate, sysdate, NULL);
+VALUES('20180001', 'ÃÖ¼­¾Æ', '991005', 'csa@univ.ac.kr', '¼­¿ï', 'I01', '¿©'
+        , 'ÀçÇÐ', '2018/03/01', NULL, sysdate, sysdate, NULL);
         
 INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
                         GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
-VALUES ( '20210001', 'ë°•ì„œì¤€', TO_DATE('2002/05/04', 'YYYY/MM/DD'), 'psj@univ.ac.kr', 'ì„œìš¸', 'B02',
-         'ë‚¨', 'ìž¬í•™', TO_DATE('2021/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
+VALUES ( '20210001', '¹Ú¼­ÁØ', TO_DATE('2002/05/04', 'YYYY/MM/DD'), 'psj@univ.ac.kr', '¼­¿ï', 'B02',
+         '³²', 'ÀçÇÐ', TO_DATE('2021/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
 
 
 INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
                         GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
-VALUES ( '20210002', 'ê¹€ì•„ìœ¤', TO_DATE('2002/05/04', 'YYYY/MM/DD'), 'kay@univ.ac.kr', 'ì¸ì²œ', 'S01',
-         'ì—¬', 'ìž¬í•™', TO_DATE('2021/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
+VALUES ( '20210002', '±è¾ÆÀ±', TO_DATE('2002/05/04', 'YYYY/MM/DD'), 'kay@univ.ac.kr', 'ÀÎÃµ', 'S01',
+         '¿©', 'ÀçÇÐ', TO_DATE('2021/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
 
 INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
                         GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
-VALUES ( '20160001', 'ì •ìˆ˜ì•ˆ', TO_DATE('1997/02/10', 'YYYY/MM/DD'), 'jsa@univ.ac.kr', 'ê²½ë‚¨', 'J01',
-         'ì—¬', 'ìž¬í•™', TO_DATE('2016/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
+VALUES ( '20160001', 'Á¤¼ö¾È', TO_DATE('1997/02/10', 'YYYY/MM/DD'), 'jsa@univ.ac.kr', '°æ³²', 'J01',
+         '¿©', 'ÀçÇÐ', TO_DATE('2016/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
 
 INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
                         GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
-VALUES ( '20150010', 'ìœ¤ë„í˜„', TO_DATE('1996/03/11', 'YYYY/MM/DD'), 'ydh@univ.ac.kr', 'ì œì£¼', 'K01',
-         'ë‚¨', 'ìž¬í•™', TO_DATE('2016/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
-
-
-INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
-                        GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
-VALUES ( '20130007', 'ì•ˆì•„ëžŒ', TO_DATE('1994/11/24', 'YYYY/MM/DD'), 'aar@univ.ac.kr', 'ê²½ê¸°', 'Y01',
-         'ì—¬', 'ìž¬í•™', TO_DATE('2013/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, 'ì˜ìƒì˜ˆìˆ  íŠ¹ê¸°ìž' );
+VALUES ( '20150010', 'À±µµÇö', TO_DATE('1996/03/11', 'YYYY/MM/DD'), 'ydh@univ.ac.kr', 'Á¦ÁÖ', 'K01',
+         '³²', 'ÀçÇÐ', TO_DATE('2016/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
 
 
 INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
                         GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
-VALUES ( '20110002', 'í•œì„±í˜¸', TO_DATE('1992/10/07', 'YYYY/MM/DD'), 'hsh@univ.ac.kr', 'ì„œìš¸', 'E03',
-         'ë‚¨', 'ìž¬í•™', TO_DATE('2015/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
+VALUES ( '20130007', '¾È¾Æ¶÷', TO_DATE('1994/11/24', 'YYYY/MM/DD'), 'aar@univ.ac.kr', '°æ±â', 'Y01',
+         '¿©', 'ÀçÇÐ', TO_DATE('2013/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, '¿µ»ó¿¹¼ú Æ¯±âÀÚ' );
+
+
+INSERT INTO MS_STUDENT ( ST_NO, NAME, BIRTH, EMAIL, ADDRESS, MJ_NO, 
+                        GENDER, STATUS, ADM_DATE, GRD_DATE, REG_DATE, UPD_DATE, ETC )
+VALUES ( '20110002', 'ÇÑ¼ºÈ£', TO_DATE('1992/10/07', 'YYYY/MM/DD'), 'hsh@univ.ac.kr', '¼­¿ï', 'E03',
+         '³²', 'ÀçÇÐ', TO_DATE('2015/03/01', 'YYYY/MM/DD'), NULL, sysdate, sysdate, NULL );
 
 SELECT * FROM MS_STUDENT;
 
--- 59. MS_STUDENT í…Œì´ë¸”ì— ë°ì´í„°ë¥¼ ìˆ˜ì •í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 59. MS_STUDENT Å×ÀÌºí¿¡ µ¥ÀÌÅÍ¸¦ ¼öÁ¤ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 /*
-    UPDATE í…Œì´ë¸”ëª…
-        SET ì»¬ëŸ¼1 = ë³€ê²½í•  ê°’,
-            ì»¬ëŸ¼2 = ë³€ê²½í•  ê°’,
+    UPDATE Å×ÀÌºí¸í
+        SET ÄÃ·³1 = º¯°æÇÒ °ª,
+            ÄÃ·³2 = º¯°æÇÒ °ª,
             ...
-    WHERE ì¡°ê±´;
+    WHERE Á¶°Ç;
 */
--- 1) í•™ìƒ ë²ˆí˜¸ê°€ 20160001ì¸ í•™ìƒì˜ ì£¼ì†Œë¥¼ 'ì„œìš¸'ë¡œ, ìž¬ì  ìƒíƒœë¥¼ 'íœ´í•™'ìœ¼ë¡œ ìˆ˜ì •í•˜ì‹œì˜¤
+-- 1) ÇÐ»ý ¹øÈ£°¡ 20160001ÀÎ ÇÐ»ýÀÇ ÁÖ¼Ò¸¦ '¼­¿ï'·Î, ÀçÀû »óÅÂ¸¦ 'ÈÞÇÐ'À¸·Î ¼öÁ¤ÇÏ½Ã¿À
 UPDATE MS_STUDENT
-    SET address = 'ì„œìš¸'
-        ,status = 'íœ´í•™'
+    SET address = '¼­¿ï'
+        ,status = 'ÈÞÇÐ'
 WHERE st_no = '20160001';
 
--- 2) í•™ìƒ ë²ˆí˜¸ê°€ 20150010ì¸ í•™ìƒì˜ ì£¼ì†Œë¥¼ 'ì„œìš¸'ë¡œ, ìž¬ì  ìƒíƒœë¥¼ 'ì¡¸ì—…', ì¡¸ì—…ì¼ìžë¥¼ '20200220', ìˆ˜ì •ì¼ìžë¥¼ í˜„ìž¬ë‚ ì§œë¡œ ê·¸ë¦¬ê³  íŠ¹ì´ì‚¬í•­ì„ 'ìˆ˜ì„'ìœ¼ë¡œ ìˆ˜ì •í•˜ì‹œì˜¤.
+-- 2) ÇÐ»ý ¹øÈ£°¡ 20150010ÀÎ ÇÐ»ýÀÇ ÁÖ¼Ò¸¦ '¼­¿ï'·Î, ÀçÀû »óÅÂ¸¦ 'Á¹¾÷', Á¹¾÷ÀÏÀÚ¸¦ '20200220', ¼öÁ¤ÀÏÀÚ¸¦ ÇöÀç³¯Â¥·Î ±×¸®°í Æ¯ÀÌ»çÇ×À» '¼ö¼®'À¸·Î ¼öÁ¤ÇÏ½Ã¿À.
 UPDATE MS_STUDENT
-    SET address = 'ì„œìš¸'
-        ,status = 'ì¡¸ì—…'
+    SET address = '¼­¿ï'
+        ,status = 'Á¹¾÷'
         ,grd_date = '2020/02/02'
         ,upd_date = sysdate
-        ,etc = 'ìˆ˜ì„'
+        ,etc = '¼ö¼®'
 WHERE st_no = '20150010';
 
--- 3) í•™ìƒ ë²ˆí˜¸ê°€ 20130007ì¸ í•™ìƒì˜ ìž¬ì  ìƒíƒœë¥¼ 'ì¡¸ì—…', ì¡¸ì—…ì¼ìžë¥¼ '20200220', ìˆ˜ì •ì¼ìžë¥¼ í˜„ìž¬ ë‚ ì§œë¡œ ìˆ˜ì •í•˜ì‹œì˜¤.
+-- 3) ÇÐ»ý ¹øÈ£°¡ 20130007ÀÎ ÇÐ»ýÀÇ ÀçÀû »óÅÂ¸¦ 'Á¹¾÷', Á¹¾÷ÀÏÀÚ¸¦ '20200220', ¼öÁ¤ÀÏÀÚ¸¦ ÇöÀç ³¯Â¥·Î ¼öÁ¤ÇÏ½Ã¿À.
 UPDATE MS_STUDENT
-    SET status = 'ì¡¸ì—…'
+    SET status = 'Á¹¾÷'
         ,grd_date = '2020/02/02'
         ,upd_date = sysdate
 WHERE st_no = 20130007;
     
--- 4) í•™ìƒë²ˆí˜¸ê°€ 20110002ì¸ í•™ìƒì˜ ìž¬ì  ìƒíƒœë¥¼ 'í‡´í•™', ìˆ˜ì •ì¼ìžë¥¼ í˜„ìž¬ ë‚ ì§œ, íŠ¹ì´ì‚¬í•­ì„ 'ìžì§„ í‡´í•™'ìœ¼ë¡œ ìˆ˜ì •í•˜ì‹œì˜¤.
+-- 4) ÇÐ»ý¹øÈ£°¡ 20110002ÀÎ ÇÐ»ýÀÇ ÀçÀû »óÅÂ¸¦ 'ÅðÇÐ', ¼öÁ¤ÀÏÀÚ¸¦ ÇöÀç ³¯Â¥, Æ¯ÀÌ»çÇ×À» 'ÀÚÁø ÅðÇÐ'À¸·Î ¼öÁ¤ÇÏ½Ã¿À.
 UPDATE MS_STUDENT
-    SET status = 'í‡´í•™'
+    SET status = 'ÅðÇÐ'
         ,upd_date = sysdate
-        ,etc = 'ìžì§„ í‡´í•™'
+        ,etc = 'ÀÚÁø ÅðÇÐ'
 WHERE st_no = 20110002;
 
--- 60. MS_STUDENT í…Œì´ë¸”ì— ë°ì´í„°ë¥¼ ì‚­ì œí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 60. MS_STUDENT Å×ÀÌºí¿¡ µ¥ÀÌÅÍ¸¦ »èÁ¦ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 DELETE FROM MS_STUDENT
 WHERE st_no = '20110002';
 
--- 61. MS_STUDENT í…Œì´ë¸”ì˜ ëª¨ë“  ì†ì„±ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 61. MS_STUDENT Å×ÀÌºíÀÇ ¸ðµç ¼Ó¼ºÀ» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT * FROM MS_STUDENT;
 
--- 62. MS_STUDENT í…Œì´ë¸”ì˜ ëª¨ë“  ì†ì„±ì„ ì¡°íšŒí•˜ì—¬ MS_STUDENT_BACK ë°±ì—… í…Œì´ë¸”ì„ ìƒì„±í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
--- ë°±ì—… í…Œì´ë¸” ë§Œë“¤ê¸°
+-- 62. MS_STUDENT Å×ÀÌºíÀÇ ¸ðµç ¼Ó¼ºÀ» Á¶È¸ÇÏ¿© MS_STUDENT_BACK ¹é¾÷ Å×ÀÌºíÀ» »ý¼ºÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- ¹é¾÷ Å×ÀÌºí ¸¸µé±â
 CREATE TABLE MS_STUDENT_BACK
 AS SELECT * FROM MS_STUDENT;
 
--- 63. MS_STUDENT í…Œì´ë¸”ì˜ íŠœí”Œì„ ì‚­ì œí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 63. MS_STUDENT Å×ÀÌºíÀÇ Æ©ÇÃÀ» »èÁ¦ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 DELETE FROM MS_STUDENT;
 
--- 64. MS_STUDENT_BACK í…Œì´ë¸”ì˜ ëª¨ë“  ì†ì„±ì„ ì¡°íšŒí•˜ì—¬ MS_STUDENT í…Œì´ë¸”ì— ì‚½ìž…í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 64. MS_STUDENT_BACK Å×ÀÌºíÀÇ ¸ðµç ¼Ó¼ºÀ» Á¶È¸ÇÏ¿© MS_STUDENT Å×ÀÌºí¿¡ »ðÀÔÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 INSERT INTO MS_STUDENT
 SELECT * FROM MS_STUDENT_BACK;
 
--- 65. MS_STUDENT í…Œì´ë¸”ì˜ ì„±ë³„ ì†ì„±ì´ (â€˜ì—¬â€™, â€˜ë‚¨â€˜, â€˜ê¸°íƒ€â€˜ ) ê°’ë§Œ ìž…ë ¥ê°€ëŠ¥í•˜ë„ë¡ í•˜ëŠ” ì œì•½ì¡°ê±´ì„ ì¶”ê°€í•˜ì‹œì˜¤.
--- ì œì•½ ì¡°ê±´ ê±¸ê¸°
+-- 65. MS_STUDENT Å×ÀÌºíÀÇ ¼ºº° ¼Ó¼ºÀÌ (¡®¿©¡¯, ¡®³²¡®, ¡®±âÅ¸¡® ) °ª¸¸ ÀÔ·Â°¡´ÉÇÏµµ·Ï ÇÏ´Â Á¦¾àÁ¶°ÇÀ» Ãß°¡ÇÏ½Ã¿À.
+-- Á¦¾à Á¶°Ç °É±â
 ALTER TABLE MS_STUDENT
 ADD CONSTRAINT MS_STD_GENDER_CHECK
-CHECK (gender IN ('ì—¬', 'ë‚¨', 'ê¸°íƒ€'));
+CHECK (gender IN ('¿©', '³²', '±âÅ¸'));
 
 UPDATE MS_STUDENT
     SET GENDER = '???';
 
--- ì œì•½ì¡°ê±´
--- ê¸°ë³¸ í‚¤(PRIMARY KEY) : ì¤‘ë³µ ë¶ˆê°€, NULL ë¶ˆê°€(í•„ìˆ˜ ìž…ë ¥)
---      => í•´ë‹¹ í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ê³ ìœ í•˜ê²Œ êµ¬ë¶„í•  ìˆ˜ ìžˆëŠ” ì†ì„±ìœ¼ë¡œ ì§€ì •
--- ê³ ìœ  í‚¤(UNIQUE KEY) : ì¤‘ë³µ ë¶ˆê°€, NULL í—ˆìš©
---      => ì¤‘ë³µë˜ì§€ ì•Šì•„ì•¼ í•  ë°ì´í„°(ID, ì£¼ë¯¼ ë²ˆí˜¸, ì´ë©”ì¼, ...)
--- CHECK ì œì•½ì¡°ê±´ : ì§€ì •í•œ ê°’ë§Œ ìž…ë ¥/ìˆ˜ì • ê°€ëŠ¥í•˜ë„ë¡ ì œí•œí•˜ëŠ” ì¡°ê±´
---      => ì§€ì •í•œ ê°’ì´ ì•„ë‹Œ ë‹¤ë¥¸ ê°’ì„ ìž…ë ¥/ìˆ˜ì •í•˜ëŠ” ê²½ìš°
--- "ì²´í¬ ì œì•½ì¡°ê±´(HR.MS_STD_GENDER_CHECK)ì´ ìœ„ë°°ë˜ì—ˆìŠµë‹ˆë‹¤" ì—ëŸ¬ ë°œìƒ
+-- Á¦¾àÁ¶°Ç
+-- ±âº» Å°(PRIMARY KEY) : Áßº¹ ºÒ°¡, NULL ºÒ°¡(ÇÊ¼ö ÀÔ·Â)
+--      => ÇØ´ç Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ °íÀ¯ÇÏ°Ô ±¸ºÐÇÒ ¼ö ÀÖ´Â ¼Ó¼ºÀ¸·Î ÁöÁ¤
+-- °íÀ¯ Å°(UNIQUE KEY) : Áßº¹ ºÒ°¡, NULL Çã¿ë
+--      => Áßº¹µÇÁö ¾Ê¾Æ¾ß ÇÒ µ¥ÀÌÅÍ(ID, ÁÖ¹Î ¹øÈ£, ÀÌ¸ÞÀÏ, ...)
+-- CHECK Á¦¾àÁ¶°Ç : ÁöÁ¤ÇÑ °ª¸¸ ÀÔ·Â/¼öÁ¤ °¡´ÉÇÏµµ·Ï Á¦ÇÑÇÏ´Â Á¶°Ç
+--      => ÁöÁ¤ÇÑ °ªÀÌ ¾Æ´Ñ ´Ù¸¥ °ªÀ» ÀÔ·Â/¼öÁ¤ÇÏ´Â °æ¿ì
+-- "Ã¼Å© Á¦¾àÁ¶°Ç(HR.MS_STD_GENDER_CHECK)ÀÌ À§¹èµÇ¾ú½À´Ï´Ù" ¿¡·¯ ¹ß»ý
