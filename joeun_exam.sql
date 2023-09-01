@@ -1,19 +1,18 @@
--- 1.
+-- 1. °èÁ¤¸íÀ» joeun_exam À¸·Î ÇÏ¿©, »ý¼ºÇÏ½Ã¿À.
 CREATE USER joeun_exam IDENTIFIED BY 123456;
--- 2.
+-- 2. joeun_exam °èÁ¤¿¡ ±âº» Å×ÀÌºí½ºÆäÀÌ½º¸¦ users ·Î º¯°æÇÏ½Ã¿À.
 ALTER USER joeun_exam DEFAULT TABLESPACE users;
--- 3.
+-- 3. joeun_exam °èÁ¤ÀÇ Å×ÀÌºí½ºÆäÀÌ½º ¿µ¿ª ÇÒ´ç·®À» ¹«Á¦ÇÑÀ¸·Î º¯°æÇÏ½Ã¿À.
 ALTER USER joeun_exam QUOTA UNLIMITED ON users;
--- 4.
-GRANT connect, resource TO HR;
--- 5. ì•„ëž˜ì˜ ë°ì´í„° ëª¨ë¸ì„ ì°¸ì¡°í•˜ì—¬, board ë¼ëŠ” ì´ë¦„ì˜ í…Œì´ë¸”ì„ ì •ì˜í•˜ëŠ” SQLì„ ìž‘ì„±í•˜ì‹œì˜¤.
-
--- * í…Œì´ë¸” ìƒì„±
+-- 4.joeun_exam °èÁ¤¿¡ ´ëÇÏ¿© connect, resource ±ÇÇÑ(·Ñ)À» ºÎ¿©ÇÏ½Ã¿À.
+GRANT connect, resource TO joeun_exam;
+-- 5. ¾Æ·¡ÀÇ µ¥ÀÌÅÍ ¸ðµ¨À» ÂüÁ¶ÇÏ¿©, board ¶ó´Â ÀÌ¸§ÀÇ Å×ÀÌºíÀ» Á¤ÀÇÇÏ´Â SQLÀ» ÀÛ¼ºÇÏ½Ã¿À.
+-- * Å×ÀÌºí »ý¼º
 /*
-    CREATE TABLE í…Œì´ë¸”ëª… (
-        ì»¬ëŸ¼ëª…1    íƒ€ìž…  [DEFAULT ê¸°ë³¸ê°’]  [NOT NULL/NULL] [ì œì•½ì¡°ê±´],
-        ì»¬ëŸ¼ëª…2    íƒ€ìž…  [DEFAULT ê¸°ë³¸ê°’]  [NOT NULL/NULL] [ì œì•½ì¡°ê±´],
-        ì»¬ëŸ¼ëª…3    íƒ€ìž…  [DEFAULT ê¸°ë³¸ê°’]  [NOT NULL/NULL] [ì œì•½ì¡°ê±´],
+    CREATE TABLE Å×ÀÌºí¸í (
+        ÄÃ·³¸í1    Å¸ÀÔ  [DEFAULT ±âº»°ª]  [NOT NULL/NULL] [Á¦¾àÁ¶°Ç],
+        ÄÃ·³¸í2    Å¸ÀÔ  [DEFAULT ±âº»°ª]  [NOT NULL/NULL] [Á¦¾àÁ¶°Ç],
+        ÄÃ·³¸í3    Å¸ÀÔ  [DEFAULT ±âº»°ª]  [NOT NULL/NULL] [Á¦¾àÁ¶°Ç],
         ...
     );
 */
@@ -27,43 +26,43 @@ CREATE TABLE board (
     ,UPD_DATE DATE DEFAULT sysdate NOT NULL
 );
 
--- 6. SEQ_BOARD ë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ì‹œí€€ìŠ¤ë¥¼ ìƒì„±í•˜ì‹œì˜¤. (ì‹œí€€ìŠ¤ì˜ ì‹œìž‘ê°’ : 1, ì¦ë¶„ê°’ :1, ìµœëŒ“ê°’ : 100000 )
+-- 6. SEQ_BOARD ¶ó´Â ÀÌ¸§À¸·Î ½ÃÄö½º¸¦ »ý¼ºÇÏ½Ã¿À. (½ÃÄö½ºÀÇ ½ÃÀÛ°ª : 1, ÁõºÐ°ª :1, ÃÖ´ñ°ª : 100000 )
 CREATE SEQUENCE SEQ_BOARD
 INCREMENT BY 1
 START WITH 1
 MINVALUE 1
 MAXVALUE 100000;
 
--- 7. ì•„ëž˜ ì¡°íšŒ ê²°ê³¼ì™€ ê°™ì´, board í…Œì´ë¸”ì— ë°ì´í„°ë¥¼ ì¶”ê°€í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 7. ¾Æ·¡ Á¶È¸ °á°ú¿Í °°ÀÌ, board Å×ÀÌºí¿¡ µ¥ÀÌÅÍ¸¦ Ãß°¡ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 INSERT INTO board (board_no, title, content, writer, reg_date, upd_date)
-VALUES (1, 'ì œëª©01', 'ë‚´ìš©01', 'ê¹€ì¡°ì€', TO_DATE('22/12/27', 'YY/MM/DD'), TO_DATE('22/12/27', 'YY/MM/DD'));
+VALUES (1, 'Á¦¸ñ01', '³»¿ë01', '±èÁ¶Àº', TO_DATE('22/12/27', 'YY/MM/DD'), TO_DATE('22/12/27', 'YY/MM/DD'));
 
 INSERT INTO board (board_no, title, content, writer, reg_date, upd_date)
-VALUES (2, 'ì œëª©02', 'ë‚´ìš©02', 'ê¹€ì¡°ì€', TO_DATE('22/12/27', 'YY/MM/DD'), TO_DATE('22/12/27', 'YY/MM/DD'));
+VALUES (2, 'Á¦¸ñ02', '³»¿ë02', '±èÁ¶Àº', TO_DATE('22/12/27', 'YY/MM/DD'), TO_DATE('22/12/27', 'YY/MM/DD'));
 
--- 8. ì•„ëž˜ ì¡°íšŒ ê²°ê³¼ì™€ ê°™ì´, board í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ìˆ˜ì •í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 8. ¾Æ·¡ Á¶È¸ °á°ú¿Í °°ÀÌ, board Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ ¼öÁ¤ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 UPDATE board
-    SET title = 'ìˆ˜ì •01'
-        ,content = 'ìˆ˜ì •01'
+    SET title = '¼öÁ¤01'
+        ,content = '¼öÁ¤01'
 WHERE board_no = '1';
 
 UPDATE board
-    SET title = 'ìˆ˜ì •02'
-        ,content = 'ìˆ˜ì •02'
+    SET title = '¼öÁ¤02'
+        ,content = '¼öÁ¤02'
 WHERE board_no = '2';
 
--- 9. board í…Œì´ë¸”ì—ì„œ ìž‘ì„±ìžê°€ ê¹€ì”¨ ì¸ ê²Œì‹œê¸€ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 9. board Å×ÀÌºí¿¡¼­ ÀÛ¼ºÀÚ°¡ ±è¾¾ ÀÎ °Ô½Ã±ÛÀ» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 SELECT *
 FROM board
-WHERE writer LIKE 'ê¹€%';
+WHERE writer LIKE '±è%';
 
--- 10. board í…Œì´ë¸”ì—ì„œ writer ì†ì„±ì´ â€˜ê¹€ì¡°ì€â€™ ì¸ ê²Œì‹œê¸€ì„ ì‚­ì œí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- 10. board Å×ÀÌºí¿¡¼­ writer ¼Ó¼ºÀÌ ¡®±èÁ¶Àº¡¯ ÀÎ °Ô½Ã±ÛÀ» »èÁ¦ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
 DELETE FROM board
-WHERE writer = 'ê¹€ì¡°ì€';
+WHERE writer = '±èÁ¶Àº';
 
 
--- 2-1. ì•„ëž˜ì— ì£¼ì–´ì§„ SQL ë¬¸ì„ ì‹¤í–‰í•˜ì˜€ì„ ë•Œ, ì‚¬ì›ì •ë³´ë¥¼ ì €ìž¥í•˜ê³  ìžˆëŠ” í…Œì´ë¸” employeeì—ì„œ ì‚¬ì›ëª…(emp_name)ê³¼ ë¶€ì„œëª…ì´ ì¡°íšŒë˜ë„ë¡ í•¨ìˆ˜ â€œget_dept_titleâ€ì„ ì •ì˜í•˜ì‹œì˜¤.
--- (ë‹¨, ë¶€ì„œëª…ì— ëŒ€í•œ ì •ë³´ëŠ” department í…Œì´ë¸”ì˜ dept_title ì»¬ëŸ¼ì— ì €ìž¥ë˜ì–´ ìžˆë‹¤.)
+-- 2-1. ¾Æ·¡¿¡ ÁÖ¾îÁø SQL ¹®À» ½ÇÇàÇÏ¿´À» ¶§, »ç¿øÁ¤º¸¸¦ ÀúÀåÇÏ°í ÀÖ´Â Å×ÀÌºí employee¿¡¼­ »ç¿ø¸í(emp_name)°ú ºÎ¼­¸íÀÌ Á¶È¸µÇµµ·Ï ÇÔ¼ö ¡°get_dept_title¡±À» Á¤ÀÇÇÏ½Ã¿À.
+-- (´Ü, ºÎ¼­¸í¿¡ ´ëÇÑ Á¤º¸´Â department Å×ÀÌºíÀÇ dept_title ÄÃ·³¿¡ ÀúÀåµÇ¾î ÀÖ´Ù.)
 CREATE OR REPLACE FUNCTION get_dept_title(p_emp_id NUMBER)
 RETURN VARCHAR2
 IS
@@ -79,20 +78,15 @@ BEGIN
 END;
 /
 
---SELECT emp_name ì‚¬ì›ëª…
--- ,get_dept_title(emp_id) ë¶€ì„œëª…
---FROM employee;
 
-
-
--- 2-2. ì•„ëž˜ì— ì£¼ì–´ì§„ SQL ë¬¸ì„ ì‹¤í–‰í•˜ì˜€ì„ ë•Œ, ì‚¬ì›ë²ˆí˜¸(emp_id), ì œëª©, ë‚´ìš©ì„ ìž…ë ¥ë°›ì•„, [ë¬¸ì œ1ë²ˆ]ì—ì„œ ì •ì˜í•œ
--- board í…Œì´ë¸”ì— ì‚¬ì›ëª…(emp_name) ìœ¼ë¡œ ê²Œì‹œê¸€ì„ ìž‘ì„±í•˜ëŠ” í”„ë¡œì‹œì € â€œpro_emp_writeâ€ë¥¼ ì •ì˜í•˜ì‹œì˜¤. 
--- EXECUTE pro_emp_write( '200', 'ì œëª©', 'ë‚´ìš©' );
+-- 2-2. ¾Æ·¡¿¡ ÁÖ¾îÁø SQL ¹®À» ½ÇÇàÇÏ¿´À» ¶§, »ç¿ø¹øÈ£(emp_id), Á¦¸ñ, ³»¿ëÀ» ÀÔ·Â¹Þ¾Æ, [¹®Á¦1¹ø]¿¡¼­ Á¤ÀÇÇÑ
+-- board Å×ÀÌºí¿¡ »ç¿ø¸í(emp_name) À¸·Î °Ô½Ã±ÛÀ» ÀÛ¼ºÇÏ´Â ÇÁ·Î½ÃÀú ¡°pro_emp_write¡±¸¦ Á¤ÀÇÇÏ½Ã¿À. 
+-- EXECUTE pro_emp_write( '200', 'Á¦¸ñ', '³»¿ë' );
 CREATE OR REPLACE PROCEDURE pro_emp_write 
 (
     IN_EMP_ID IN employee.emp_id%TYPE,
-    IN_TITLE IN VARCHAR2 DEFAULT 'ì œëª©ì—†ìŒ',
-    IN_CONTENT IN VARCHAR2 DEFAULT 'ë‚´ìš©ì—†ìŒ'
+    IN_TITLE IN VARCHAR2 DEFAULT 'Á¦¸ñ¾øÀ½',
+    IN_CONTENT IN VARCHAR2 DEFAULT '³»¿ë¾øÀ½'
 )
 IS
     V_EMP_NAME employee.emp_name%TYPE;
@@ -106,25 +100,6 @@ BEGIN
 
 END;
 /
-
---
---EXECUTE pro_emp_write('200', 'ì œëª©', 'ë‚´ìš©1');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
